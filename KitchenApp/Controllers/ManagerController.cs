@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OrderApp.DateProvider;
-using OrderApp.Models;
+using KitchenApp.DateProvider;
+using KitchenApp.Models;
 using System;
 using System.Linq;
 
-namespace OrderApp.Controllers
+namespace KitchenApp.Controllers
 {
     [Route("api/[controller]")]
     public class ManagerController : Controller
     {
-        OrderAppContext db;
-        public ManagerController(OrderAppContext context)
+        KitchenAppContext db;
+        public ManagerController(KitchenAppContext context)
         {
             db = context;
         }

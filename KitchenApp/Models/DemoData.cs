@@ -1,14 +1,14 @@
-﻿using OrderApp.DateProvider;
+﻿using KitchenApp.DateProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderApp.Models
+namespace KitchenApp.Models
 {
     public class DemoData
     {
-        public void CreateDemoData(OrderAppContext context)
+        public void CreateDemoData(KitchenAppContext context)
         {
             User u1 = new User() { IsAdmin = true, Login = "Dilshod", Password = "123" };
             User u2 = new User() { IsAdmin = true, Login = "Raufjon", Password = "321" };

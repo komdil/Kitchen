@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrderApp.Models;
+using KitchenApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderApp.DateProvider
+namespace KitchenApp.DateProvider
 {
-    public class OrderAppContext : DbContext
+    public class KitchenAppContext : DbContext
 
     {
-        public OrderAppContext(DbContextOptions<OrderAppContext> options)
+        public KitchenAppContext(DbContextOptions<KitchenAppContext> options)
             : base(options)
         {
             Database.EnsureCreated();

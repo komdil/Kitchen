@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OrderApp.DateProvider;
-using OrderApp.Models;
+using KitchenApp.DateProvider;
+using KitchenApp.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace OrderApp.Controllers
+namespace KitchenApp.Controllers
 {
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        OrderAppContext db;
-        public UsersController(OrderAppContext context)
+        KitchenAppContext db;
+        public UsersController(KitchenAppContext context)
         {
             db = context;
         }

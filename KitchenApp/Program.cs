@@ -7,9 +7,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OrderApp.DateProvider;
+using KitchenApp.DateProvider;
 
-namespace OrderApp
+namespace KitchenApp
 {
     public class Program
     {

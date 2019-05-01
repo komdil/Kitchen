@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using OrderApp.DateProvider;
+using KitchenApp.DateProvider;
 
-namespace OrderApp
+namespace KitchenApp
 {
     public class Startup
     {
@@ -17,15 +17,15 @@ namespace OrderApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<OrderAppContext>(option =>
+            services.AddDbContext<KitchenAppContext>(option =>
             {
-                option.UseSqlServer(@"Data Source=localhost;Initial Catalog=OrderAppDb; Integrated Security=True; MultipleActiveResultSets=true;");
+                option.UseSqlServer(@"Data Source=localhost;Initial Catalog=KitchenAppDb; Integrated Security=True; MultipleActiveResultSets=true;");
             });
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, OrderAppContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, KitchenAppContext context)
         {
             if (env.IsDevelopment())
             {
