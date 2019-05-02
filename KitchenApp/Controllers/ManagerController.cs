@@ -76,7 +76,7 @@ namespace KitchenApp.Controllers
                         }
                         else
                         {
-                            if (!order.Closed)
+                            if (!order.IsClosed)
                             {
                                 db.Remove(orderDetail);
                                 db.SaveChanges();
@@ -114,16 +114,16 @@ namespace KitchenApp.Controllers
                         perPerson = amount / order.PeopleCount;
                         foreach (var orderDetail in order.Details)
                         {
-                            orderDetail.Amount = perPerson;
+                          //  orderDetail.Amount = perPerson;
                         }
                     }
-                    order.Closed = true;
+                    order.IsClosed = true;
                     db.SaveChanges();
                     return Ok($"Order is closed sucessfully. Today price is {amount}SMN and per person {perPerson}SMN");
                 }
                 else
                 {
-                    order.Closed = false;
+                    order.IsClosed = false;
                     db.SaveChanges();
                     return Ok("Order has been opened for users!");
                 }
