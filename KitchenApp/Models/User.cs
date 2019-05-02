@@ -37,9 +37,19 @@ namespace KitchenApp.Models
         public UserRole Role { get; set; }
         public virtual List<Payment> Payments { get; set; }
         public virtual List<OrderDetail> Details { get; set; }
+
+        public void AddNewUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
     public enum UserRole
     {
-        Admin,
+        Admin, User
     }
 }

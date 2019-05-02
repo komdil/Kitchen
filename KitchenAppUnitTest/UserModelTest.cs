@@ -4,7 +4,7 @@ using System.Linq;
 namespace KitchenAppUnitTest
 {
     [TestClass]
-    public class UserModelTest
+    public class AdminModelTest
     {
         [TestMethod]
         public void SelectMenu()
@@ -18,6 +18,28 @@ namespace KitchenAppUnitTest
             Assert.AreEqual(0, order.PeopleCount, "When Order created count of people, who choosed this menu should be equal to 0");
             Assert.AreEqual(false, order.Closed, "When Order created Closed field should be false");
             Assert.AreNotEqual(0, order.Price, "Price can't be 0");
+        }
+
+        [TestMethod]
+        public void UserAdd()
+        {
+            User admin = new User();
+            User user = new User();
+            admin.AddNewUser(user);
+
+            Assert.IsNotNull(user.Id,"User must have ID");
+            Assert.IsNotNull(user.Login, "User must have Login");
+            Assert.IsNotNull(user.Password, "User must have Password");
+            Assert.AreNotEqual(UserRole.Admin, user.Role, "New user can't be Admin");
+        }
+
+        [TestMethod]
+        public void UserDelete()
+        {
+            User admin = new User();
+            User user = new User();
+
+            admin.Delete(user);
         }
     }
 }
