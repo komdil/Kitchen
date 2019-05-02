@@ -23,6 +23,12 @@ namespace KitchenApp.Models
                 id = value;
             }
         }
+
+        public void SelectMenuForToday(Menu menu)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Login { get; set; }
         public string Password { get; set; }
 
