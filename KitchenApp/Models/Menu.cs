@@ -26,7 +26,5 @@ namespace KitchenApp.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public virtual List<Order> Orders { get; set; }
-
-
     }
 }

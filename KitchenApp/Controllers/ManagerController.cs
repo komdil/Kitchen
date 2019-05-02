@@ -10,8 +10,8 @@ namespace KitchenApp.Controllers
     [Route("api/[controller]")]
     public class ManagerController : Controller
     {
-        KitchenAppContext db;
-        public ManagerController(KitchenAppContext context)
+        MainContext db;
+        public ManagerController(MainContext context)
         {
             db = context;
         }

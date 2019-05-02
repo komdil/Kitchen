@@ -17,7 +17,7 @@ namespace KitchenApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<KitchenAppContext>(option =>
+            services.AddDbContext<MainContext>(option =>
             {
                 option.UseSqlServer(@"Data Source=localhost;Initial Catalog=KitchenAppDb; Integrated Security=True; MultipleActiveResultSets=true;");
             });
@@ -25,7 +25,7 @@ namespace KitchenApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, KitchenAppContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MainContext context)
         {
             if (env.IsDevelopment())
             {

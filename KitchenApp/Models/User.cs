@@ -25,8 +25,15 @@ namespace KitchenApp.Models
         }
         public string Login { get; set; }
         public string Password { get; set; }
+
+        //TODO It should be UserRole
         public bool IsAdmin { get; set; }
+        public UserRole Role { get; set; }
         public virtual List<Payment> Payments { get; set; }
         public virtual List<OrderDetail> Details { get; set; }
+    }
+    public enum UserRole
+    {
+        Admin,
     }
 }

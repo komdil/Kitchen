@@ -13,8 +13,8 @@ namespace KitchenApp.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        KitchenAppContext db;
-        public UsersController(KitchenAppContext context)
+        MainContext db;
+        public UsersController(MainContext context)
         {
             db = context;
         }

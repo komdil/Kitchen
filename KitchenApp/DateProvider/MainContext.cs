@@ -1,16 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using KitchenApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KitchenApp.DateProvider
 {
-    public class KitchenAppContext : DbContext
+    public class MainContext : DbContext
 
     {
-        public KitchenAppContext(DbContextOptions<KitchenAppContext> options)
+        public MainContext(DbContextOptions<MainContext> options)
             : base(options)
         {
             Database.EnsureCreated();
@@ -85,9 +81,9 @@ namespace KitchenApp.DateProvider
             etBuilder.Property(o => o.Amount).HasColumnName("Amount");
             //etBuilder.Property(o => o.Order).HasColumnName("Order");
             etBuilder.Property(o => o.OrderedDateTime).HasColumnName("OrderedDateTime");
-           // etBuilder.Property(o => o.Payments).HasColumnName("Payments");
+            // etBuilder.Property(o => o.Payments).HasColumnName("Payments");
             etBuilder.Property(o => o.Reminder).HasColumnName("Reminder");
-           // etBuilder.Property(o => o.User).HasColumnName("User");
+            // etBuilder.Property(o => o.User).HasColumnName("User");
             etBuilder.HasOne(o => o.User);
             etBuilder.HasMany(o => o.Payments).WithOne(d => d.OrderDetail);
 
@@ -98,8 +94,8 @@ namespace KitchenApp.DateProvider
             etBuilder.ToTable("PaymentDetail");
             etBuilder.HasKey(p => new { p.Id });
             etBuilder.Property(p => p.Id).HasColumnName("Id");
-           // etBuilder.Property(p => p.Payment).HasColumnName("Payment");
-           // etBuilder.Property(p => p.OrderDetail).HasColumnName("OrderDetail");
+            // etBuilder.Property(p => p.Payment).HasColumnName("Payment");
+            // etBuilder.Property(p => p.OrderDetail).HasColumnName("OrderDetail");
             etBuilder.HasOne(p => p.OrderDetail);
             etBuilder.HasOne(p => p.Payment);
         }
@@ -110,8 +106,6 @@ namespace KitchenApp.DateProvider
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentDetail> PaymentDetails { get; set; }
-
-
     }
 }
 

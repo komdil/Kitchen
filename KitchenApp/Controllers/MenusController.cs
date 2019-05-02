@@ -12,24 +12,26 @@ namespace KitchenApp.Controllers
     [Route("api/[controller]")]
     public class MenusController : Controller
     {
-        KitchenAppContext db;
-        public MenusController(KitchenAppContext context)
+        MainContext context;
+        public MenusController(MainContext context)
         {
-            db = context;
+            this.context = context;
         }
 
         // GET: api/<controller>
         [HttpGet]
         public IEnumerable<Menu> Get()
         {
-            return db.Menus.ToList();
+            context.Menus.Add(new Menu());
+            context.SaveChanges();
+            return context.Menus.ToList();
         }
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            Menu menu = db.Menus.FirstOrDefault(a => a.Id == id);
+            Menu menu = context.Menus.FirstOrDefault(a => a.Id == id);
             if (menu == null)
             {
                 return NotFound();
@@ -48,8 +50,8 @@ namespace KitchenApp.Controllers
             {
                 return BadRequest();
             }
-            db.Menus.Add(menu);
-            db.SaveChanges();
+            context.Menus.Add(menu);
+            context.SaveChanges();
             return Ok(menu);
         }
 
@@ -61,12 +63,12 @@ namespace KitchenApp.Controllers
             {
                 return BadRequest();
             }
-            if (!db.Menus.Any(x => x.Id == menu.Id))
+            if (!context.Menus.Any(x => x.Id == menu.Id))
             {
                 return NotFound();
             }
-            db.Update(menu);
-            db.SaveChanges();
+            context.Update(menu);
+            context.SaveChanges();
             return Ok(menu);
         }
 
@@ -74,13 +76,13 @@ namespace KitchenApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            Menu menu = db.Menus.FirstOrDefault(x => x.Id == id);
+            Menu menu = context.Menus.FirstOrDefault(x => x.Id == id);
             if (menu == null)
             {
                 return NotFound();
             }
-            db.Menus.Remove(menu);
-            db.SaveChanges();
+            context.Menus.Remove(menu);
+            context.SaveChanges();
             return Ok(menu);
         }
     }

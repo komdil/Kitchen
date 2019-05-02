@@ -8,7 +8,7 @@ namespace KitchenApp.Models
 {
     public class DemoData
     {
-        public void CreateDemoData(KitchenAppContext context)
+        public void CreateDemoData(MainContext context)
         {
             User u1 = new User() { IsAdmin = true, Login = "Dilshod", Password = "123" };
             User u2 = new User() { IsAdmin = true, Login = "Raufjon", Password = "321" };
