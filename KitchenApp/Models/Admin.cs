@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace KitchenApp.Models
 {
     public class Admin:User
-    {
+    { 
 
 
     }
