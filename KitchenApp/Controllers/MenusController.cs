@@ -22,7 +22,6 @@ namespace KitchenApp.Controllers
         [HttpGet]
         public IEnumerable<Menu> Get()
         {
-            var newmneu = db.Menus.Add(new Menu());
             return db.Menus.ToList();
         }
 
