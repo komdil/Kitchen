@@ -25,9 +25,10 @@ namespace KitchenApp.Models
         }
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
-        public DateTime OrderedDateTime { get; set; }
-        public virtual List<PaymentDetail> Payments { get; set; }
       
+        public virtual List<PaymentDetail> Payments { get; set; }
+  
         public virtual Order Order { get; set; }
+        public DateTime OrderedDateTime { get; internal set; }
     }
 }

@@ -29,8 +29,7 @@ namespace KitchenApp.DateProvider
         {
 
             var etBuilder = builder.Entity<Order>();
-           
-            etBuilder.HasKey(o => new { o.Id });
+             etBuilder.HasKey(o => new { o.Id });
             
             etBuilder.HasOne(o => o.Menu);
             etBuilder.HasMany(o => o.Details).WithOne(d => d.Order);
@@ -38,9 +37,11 @@ namespace KitchenApp.DateProvider
         }
         void MenuMapping(ModelBuilder builder)
         {
+
+
             var etBuilder = builder.Entity<Menu>();
             etBuilder.HasKey(m => new { m.Id });
-             etBuilder.HasMany(m => m.Orders).WithOne(d => d.Menu);
+            etBuilder.HasMany(m => m.Orders).WithOne(d => d.Menu);
         }
         void UserMapping(ModelBuilder builder)
         {
@@ -53,18 +54,14 @@ namespace KitchenApp.DateProvider
         void PaymentMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<Payment>();
-          
             etBuilder.HasKey(p => new { p.Id });
-           
             etBuilder.HasMany(p => p.Details).WithOne(d => d.Payment);
             etBuilder.HasOne(p => p.User);
         }
         void OrderDetailMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<OrderDetail>();
-            
             etBuilder.HasKey(o => new { o.Id });
-            
             etBuilder.HasOne(o => o.User);
             etBuilder.HasMany(o => o.Payments).WithOne(d => d.OrderDetail);
 
@@ -72,9 +69,8 @@ namespace KitchenApp.DateProvider
         void PaymentDetailMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<PaymentDetail>();
-          
             etBuilder.HasKey(p => new { p.Id });
-             etBuilder.HasOne(p => p.OrderDetail);
+            etBuilder.HasOne(p => p.OrderDetail);
             etBuilder.HasOne(p => p.Payment);
         }
 
