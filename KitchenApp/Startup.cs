@@ -35,7 +35,7 @@ namespace KitchenApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=index}");
+                    template: "{controller=Home}/{action=Authorization}");
             });
         }
     }
