@@ -1,8 +1,5 @@
 ﻿using KitchenApp.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KitchenAppUnitTest
 {
@@ -17,9 +14,8 @@ namespace KitchenAppUnitTest
 
             user.ChooseMenu(menu);
 
-            Assert.AreNotEqual(0, menu.Orders[0].Details.Count,"If some user choosed menu, than Order.OrderDetail can't be 0");
+            Assert.AreNotEqual(0, menu.Orders[0].Details.Count, "If some user choosed menu, than Order.OrderDetail can't be 0");
             //Assert.IsTrue(menu.Orders[0].Details.ForEach());
-
         }
     }
 }
