@@ -27,5 +27,6 @@ namespace KitchenApp.Models
         public int Amount { get; set; }
         public virtual List<PaymentDetail> Details { get; set; }
         public virtual User User { get; set; }
+        public Guid UserId { get; set; }
     }
 }

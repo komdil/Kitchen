@@ -28,8 +28,7 @@ namespace KitchenApp.Models
         public virtual Menu Menu { get; set; }
         public virtual bool IsClosed { get; set; }
         public decimal Price { get; set; }
-        public virtual int PeopleCount { get; set; }
+        public virtual int PeopleCount { get { return Details.Count; } }
         public virtual List<OrderDetail> Details { get; set; }
-
     }
 }
