@@ -11,10 +11,10 @@ using KitchenApp.Models;
 namespace KitchenApp.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UserController : Controller
     {
-        MainContext db;
-        public UsersController(MainContext context)
+        KitchenAppContext db;
+        public UserController(KitchenAppContext context)
         {
             db = context;
         }
@@ -23,6 +23,7 @@ namespace KitchenApp.Controllers
         [HttpGet]
         public IEnumerable<User> Get()
         {
+            db.SaveChanges();
             return db.Users.ToList();
         }
 
