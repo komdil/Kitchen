@@ -16,14 +16,14 @@ namespace KitchenAppUnitTest
             Order order = menu.Orders.Single();
             Assert.AreEqual(menu, order.Menu, "Field Menu of Order class must be equal to choosed menu!");
             Assert.AreEqual(0, order.PeopleCount, "When Order created count of people, who choosed this menu should be equal to 0");
-            Assert.AreEqual(false, order.Closed, "When Order created Closed field should be false");
+            Assert.AreEqual(false, order.IsClosed, "When Order created Closed field should be false");
             Assert.AreNotEqual(0, order.Price, "Price can't be 0");
         }
 
         [TestMethod]
         public void UserAdd()
         {
-            User admin = new User();
+            Admin admin = new Admin();
             User user = new User();
             admin.AddNewUser(user);
 
@@ -36,7 +36,7 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void UserDelete()
         {
-            User admin = new User();
+            Admin admin = new Admin();
             User user = new User();
 
             admin.Delete(user);

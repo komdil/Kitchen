@@ -7,6 +7,14 @@ namespace KitchenApp.Models
 {
     public class Admin : User
     {
+        public void AddNewUser(User user)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void Delete(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
