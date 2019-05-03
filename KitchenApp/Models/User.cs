@@ -24,7 +24,7 @@ namespace KitchenApp.Models
             }
         }
 
-        public void SelectMenuForToday(Menu menu)
+        public void ChooseMenu(Menu menu)
         {
             throw new NotImplementedException();
         }

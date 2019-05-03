@@ -16,5 +16,11 @@ namespace KitchenApp.Models
         {
             throw new NotImplementedException();
         }
+        public void SelectMenuForToday(Menu menu)
+        {
+            Order order = new Order() {Id= new Guid(), Date = DateTime.Now};
+            order.Menu = menu;                
+            menu.Orders.Add(order);
+        }
     }
 }
