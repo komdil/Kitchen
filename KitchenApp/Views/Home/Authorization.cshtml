@@ -8,7 +8,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="~/lib/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="~/lib/bootstrap/css//" rel="stylesheet" />
+    <link href="~/lib/bootstrap/css//" rel="stylesheet" /> 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <title>Authorization</title>
 
@@ -20,7 +20,7 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" method="get" class="form"  asp-action="Login" asp-controller="Account"  asp-anti-forgery="true">
+                        <form id="login-form" method="post" class="form"  asp-action="Login" asp-controller="Account"  asp-anti-forgery="true">
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Username:</label><br>
@@ -32,9 +32,9 @@
                                 <input type="text" asp-for="Password" id="password" class="form-control">
                                 <span asp-validation-for="Password" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                                <input type="submit" name="SignUp" class="btn btn-info btn-md" value="SignUp">
+                                <input type="submit" name="SignUp"   class="btn btn-info btn-md" value="SignUp">
                             </div>
                            
                         </form>

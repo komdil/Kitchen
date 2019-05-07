@@ -10,6 +10,7 @@ namespace KitchenApp.ViewsModel
     {
 
         [Required(ErrorMessage = "Login is not assignet")]
+        
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Password is not assignet")]
