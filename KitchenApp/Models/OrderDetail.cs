@@ -28,7 +28,7 @@ namespace KitchenApp.Models
       
         public virtual List<PaymentDetail> Payments { get; set; }
   
-        public virtual Order Order { get; set; }
+        public virtual OrderAppContext Order { get; set; }
         public DateTime OrderedDateTime { get; internal set; }
     }
 }

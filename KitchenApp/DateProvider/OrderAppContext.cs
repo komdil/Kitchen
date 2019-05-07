@@ -28,7 +28,7 @@ namespace KitchenApp.DateProvider
         void OrderMapping(ModelBuilder builder)
         {
 
-            var etBuilder = builder.Entity<Order>();
+            var etBuilder = builder.Entity<OrderAppContext>();
              etBuilder.HasKey(o => new { o.Id });
             
             etBuilder.HasOne(o => o.Menu);
@@ -76,12 +76,10 @@ namespace KitchenApp.DateProvider
 
         public DbSet<User> Users { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderAppContext> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentDetail> PaymentDetails { get; set; }
-
-
     }
 }
 

@@ -26,7 +26,7 @@ namespace KitchenApp.Models
             context.Add(m3);
             context.SaveChanges();
 
-            Order o = new Order() { Menu = m1, IsClosed = false, Date = DateTime.Today, Price = 0, PeopleCount = 0 };
+            OrderAppContext o = new OrderAppContext() { Menu = m1, IsClosed = false, Date = DateTime.Today, Price = 0, PeopleCount = 0 };
             context.Add(o);
             context.SaveChanges();
 

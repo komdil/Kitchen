@@ -139,7 +139,7 @@ namespace KitchenApp.Controllers
             }
             else
             {
-                var order = new Order() { Date = DateTime.Today, Menu = menu };
+                var order = new OrderAppContext() { Date = DateTime.Today, Menu = menu };
                 db.Add(order);
                 db.SaveChanges();
                 return Ok("Today's order is created and is open for orders.");

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
-    public class Order
+    public class OrderAppContext
     {
         Guid id;
         public Guid Id
