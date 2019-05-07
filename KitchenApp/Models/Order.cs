@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
-    public class OrderAppContext
+    public class Order
     {
         Guid id;
         public Guid Id

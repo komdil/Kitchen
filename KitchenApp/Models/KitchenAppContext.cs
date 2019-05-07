@@ -4,13 +4,13 @@ using KitchenApp.Models;
 namespace KitchenApp.DateProvider
 {
     public class KitchenAppContext : DbContext
-
     {
         public KitchenAppContext(DbContextOptions<KitchenAppContext> options)
             : base(options)
         {
             Database.EnsureDeleted();
             Database.EnsureCreated();
+            BlankData.CreateBlankData(this);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
