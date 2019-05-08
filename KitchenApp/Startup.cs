@@ -22,7 +22,7 @@ namespace KitchenApp
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<KitchenAppContext>(options => options.UseSqlServer(connection));
-
+           
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions

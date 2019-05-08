@@ -36,8 +36,6 @@ namespace KitchenApp.Controllers
             return View();
         }
 
-
-
         public IActionResult AccessDenied(string url)
         {
             return View(model: url);

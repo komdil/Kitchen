@@ -3,24 +3,8 @@ using System.Collections.Generic;
 
 namespace KitchenApp.Models
 {
-    public class User
+    public class User : Entity
     {
-        Guid id;
-        public Guid Id
-        {
-            get
-            {
-                if (id == null || id == Guid.Empty)
-                {
-                    id = new Guid();
-                }
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
-        }
         public string Login { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
