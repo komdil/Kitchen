@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
-    public class model : User
+    public class Admin : User
     {
         public void AddNewUser(User user)
         {
@@ -23,5 +23,15 @@ namespace KitchenApp.Models
             menu.Orders.Add(order);
         }
         public override string Role { get { return Helper.ADMIN_ROLE; } }
+
+        public void SetPrice(decimal price)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetPayment(User user, decimal payment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
