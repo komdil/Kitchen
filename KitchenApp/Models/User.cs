@@ -24,9 +24,17 @@ namespace KitchenApp.Models
             }
         }
 
-        public void ChooseMenu(Menu menu)
+        public void AcceptMenu(Menu menu, bool isAccepted)
         {
-            throw new NotImplementedException();
+            if (isAccepted)
+            {
+                if (menu.Orders.Count != 0)//order created
+                {
+                    OrderDetail orderDetail = new OrderDetail() { Id = new Guid(), User = this, Order = menu.Orders.First() };
+                    menu.Orders.First().Details.Add(orderDetail);
+                }
+                else throw new Exception("Order is not created");
+            }
         }
 
         public string Login { get; set; }

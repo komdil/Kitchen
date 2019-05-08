@@ -19,7 +19,7 @@ namespace KitchenApp
         {
             services.AddDbContext<KitchenAppContext>(option =>
             {
-                option.UseSqlServer(@"Data Source=localhost;Initial Catalog=KitchenAppDb; Integrated Security=True; MultipleActiveResultSets=true;");
+                option.UseSqlServer(@"Data Source=DESKTOP-GL612FN\SQLSERVER;Initial Catalog=KitchenAppDb; Integrated Security=True; MultipleActiveResultSets=true;");
             });
             services.AddMvc();
         }

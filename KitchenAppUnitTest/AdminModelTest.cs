@@ -19,6 +19,5 @@ namespace KitchenAppUnitTest
             Assert.AreEqual(false, order.IsClosed, "When Order created Closed field should be false");
           
         }
-
     }
 }

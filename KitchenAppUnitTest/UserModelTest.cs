@@ -8,13 +8,17 @@ namespace KitchenAppUnitTest
     public class UserModelTest
     {
         [TestMethod]
-        public void ChooseMenu()
+        public void AcceptMenu()
         {
             User user = new User();
             Menu menu = new Menu();
-            user.ChooseMenu(menu);
-            Assert.AreNotEqual(0, menu.Orders[0].Details.Count, "If some user choosed menu, than Order.OrderDetail can't be 0");
-            Assert.IsTrue(menu.Orders[0].Details.Any(x => x.User == user));
+            bool isAccepted = true;
+            user.AcceptMenu(menu, isAccepted);
+
+            Assert.AreNotEqual(0, menu.Orders.Count, "We can't choose menu if admin doesn't create order");            
+            Assert.AreNotEqual(0, menu.Orders.First().Details.Count, "If some user choosed menu, than Order.OrderDetail can't be 0");
+            Assert.IsTrue(menu.Orders.First().Details.Any(x => x.User == user),"If user accepted menu, than OrderDetail should contain info about this");
+        
         }
     }
 }
