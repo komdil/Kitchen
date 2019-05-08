@@ -9,7 +9,7 @@ namespace KitchenApp.Models
         {
             if (!Context.Admins.Any())
             {
-                Admin defaultAdmin = new Admin()
+                model defaultAdmin = new model()
                 {
                     FirstName = "Administrator",
                     LastName = "Administrator",

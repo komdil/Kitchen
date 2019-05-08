@@ -23,32 +23,46 @@ namespace KitchenApp.Controllers
 
         [HttpGet]
         public IActionResult Login()
-            {
+        {
+            if (IsUserAuhorized)
+                return RedirectToHomePage();
             return View();
+        }
+
+        bool IsUserAuhorized => this.User.Identity.IsAuthenticated;
+        IActionResult RedirectToHomePage() => RedirectToAction("Index", "Home");
+
+        public IActionResult AccessDenied(string url)
+        {
+            return View(model: url);
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
+            if (IsUserAuhorized)
+                return RedirectToHomePage();
             if (ModelState.IsValid)
             {
                 var user = appContext.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == model.Password);
                 if (user != null)
                 {
-                    await Authenticate(model.Login);
+                    await Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
+
                 ModelState.AddModelError("", "Incorrect login or password");
             }
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
             };
 
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

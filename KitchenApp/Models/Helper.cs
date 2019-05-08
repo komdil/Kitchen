@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
-    public class model : User
+    public static class Helper
     {
-        public override string Role { get { return Helper.ADMIN_ROLE; } }
+        public const string ADMIN_ROLE = "Admin";
+        public const string USER_ROLE = "User";
     }
 }
