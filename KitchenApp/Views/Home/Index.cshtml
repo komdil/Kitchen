@@ -1,0 +1,8 @@
+﻿<!DOCTYPE html>
+
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Admin Page", "Index", "Admin", "http", null, null, null, null)
+
+    @Html.ActionLink("User Page", "Index", "User", "http", null, null, null, null)
+}
