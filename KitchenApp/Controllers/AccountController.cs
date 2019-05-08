@@ -50,12 +50,17 @@ namespace KitchenApp.Controllers
                     await Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
+                else
+                {
 
-                ModelState.AddModelError("", "Incorrect login or password");
+                    ModelState.AddModelError("", "Incorrect login or password");
+                    return View(model);
+                }
             }
-            return View(model);
+            return View();
+            
         }
-
+        
         private async Task Authenticate(User user)
         {
 
