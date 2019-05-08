@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
@@ -39,15 +37,12 @@ namespace KitchenApp.Models
 
         public string Login { get; set; }
         public string Password { get; set; }
-
-        //TODO It should be UserRole
-        public bool IsAdmin { get; set; }
-        public UserRole Role { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public virtual bool IsAdmin { get { return this is model; } }
         public virtual List<Payment> Payments { get; set; }
         public virtual List<OrderDetail> Details { get; set; }
-    }
-    public enum UserRole
-    {
-        Admin, User
+
+        public virtual string Role { get { return Helper.USER_ROLE; } }
     }
 }

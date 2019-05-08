@@ -4,13 +4,13 @@ using KitchenApp.Models;
 namespace KitchenApp.DateProvider
 {
     public class KitchenAppContext : DbContext
-
     {
         public KitchenAppContext(DbContextOptions<KitchenAppContext> options)
             : base(options)
         {
             Database.EnsureDeleted();
             Database.EnsureCreated();
+            BlankData.CreateBlankData(this);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,7 +69,7 @@ namespace KitchenApp.DateProvider
 
         public DbSet<User> Users { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<model> Admins { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Payment> Payments { get; set; }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
-    public class Admin : User
+    public class model : User
     {
         public void AddNewUser(User user)
         {
@@ -22,5 +22,6 @@ namespace KitchenApp.Models
             order.Menu = menu;                
             menu.Orders.Add(order);
         }
+        public override string Role { get { return Helper.ADMIN_ROLE; } }
     }
 }
