@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
-    public class OrderAppContext
+    public class Order
     {
         Guid id;
         public Guid Id
@@ -28,8 +26,7 @@ namespace KitchenApp.Models
         public virtual Menu Menu { get; set; }
         public virtual bool IsClosed { get; set; }
         public decimal Price { get; set; }
-        public virtual int PeopleCount { get; set; }
+        public virtual int PeopleCount { get { return Details.Count; } }
         public virtual List<OrderDetail> Details { get; set; }
-
     }
 }

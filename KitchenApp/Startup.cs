@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using KitchenApp.DateProvider;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using KitchenApp.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using KitchenApp.DateProvider;
 
 namespace KitchenApp
 {
@@ -25,9 +23,9 @@ namespace KitchenApp
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<KitchenAppContext>(options => options.UseSqlServer(connection));
 
-            
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => 
+                .AddCookie(options => //CookieAuthenticationOptions
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
@@ -42,14 +40,14 @@ namespace KitchenApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               
-                
             }
-           else
+            else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
+            app.UseDefaultFiles();
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
