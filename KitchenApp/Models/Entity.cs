@@ -1,17 +1,33 @@
 ﻿using KitchenApp.DateProvider;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
-    public class Entity
+    public abstract class Entity
     {
-        public KitchenAppContext Context { get; }
-        public Entity()
+        Guid id;
+        public Guid Id
         {
-            //Context = _context;
+            get
+            {
+                if (id == null || id == Guid.Empty)
+                {
+                    id = new Guid();
+                }
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+
+        public KitchenAppContext GetContext()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<KitchenAppContext>();
+            optionsBuilder.UseSqlServer(Helper.ConnectionString);
+            return new KitchenAppContext(optionsBuilder.Options);
         }
     }
 }

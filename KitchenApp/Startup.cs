@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using KitchenApp.Models;
 
 namespace KitchenApp
 {
@@ -23,7 +24,7 @@ namespace KitchenApp
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<KitchenAppContext>(options => options.UseSqlServer(connection));
 
-
+            Helper.ConnectionString = connection;
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {

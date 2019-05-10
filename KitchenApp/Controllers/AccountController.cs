@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KitchenApp.Models;
@@ -14,12 +13,20 @@ namespace KitchenApp.Controllers
 {
     public class AccountController : Controller
     {
+        #region Helpers
 
-        private KitchenAppContext appContext;
+        bool IsUserAuhorized => User.Identity.IsAuthenticated;
+        IActionResult RedirectToHomePage() => RedirectToAction("Index", "Home");
+
+        #endregion
+
+        KitchenAppContext appContext;
         public AccountController(KitchenAppContext context)
         {
             appContext = context;
         }
+
+        #region Actions
 
         [HttpGet]
         public IActionResult Login()
@@ -28,9 +35,6 @@ namespace KitchenApp.Controllers
                 return RedirectToHomePage();
             return View();
         }
-
-        bool IsUserAuhorized => this.User.Identity.IsAuthenticated;
-        IActionResult RedirectToHomePage() => RedirectToAction("Index", "Home");
 
         public IActionResult AccessDenied(string url)
         {
@@ -56,6 +60,14 @@ namespace KitchenApp.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account");
+        }
+
+        #endregion
+
         private async Task Authenticate(User user)
         {
 
@@ -68,12 +80,6 @@ namespace KitchenApp.Controllers
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-        }
-
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
         }
     }
 }
