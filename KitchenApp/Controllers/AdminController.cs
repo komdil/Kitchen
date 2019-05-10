@@ -15,5 +15,36 @@ namespace KitchenApp.Controllers
         {
             return View();
         }
+        public IActionResult Users()
+        {
+            return View();
+        }
+        public IActionResult Payments()
+        {
+            return View();
+        }
+
+        public IActionResult Orders()
+        {
+            return View();
+        }
+        public IActionResult Menus()
+        {
+            return View();
+        }
+
+        public IActionResult Info()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
     }
 }

@@ -1,0 +1,84 @@
+body{
+
+	font-size: 40px;
+	font-style: italic;
+	font-weight: bold;
+-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-color: #e3f2fd;
+}
+
+h1
+{
+
+	margin:40px 0 60px 0;
+	font-weight:bold;
+}
+
+.our-team-main
+{
+	
+	height:auto;
+	border-bottom:3px white solid;
+	
+	text-align:center;
+	border-radius:10px;
+	
+	margin-bottom:28px;
+}
+
+
+.our-team-main img
+{
+	border-radius:60%;
+	margin-bottom:20px;
+	width: 90px;
+}
+
+.our-team-main h3
+{
+	font-size:20px;
+	font-weight:700;
+}
+
+.our-team-main p
+{
+	margin-bottom:0;
+}
+
+
+
+.team-front
+{
+	width:100%;
+	height:auto;
+	position:relative;
+	z-index:10;
+background-color: white;
+	padding:30px;
+	bottom:0px;
+	transition: all 0.5s ease;
+}
+
+
+
+.our-team-main:hover
+{
+	border-color:rgb(194, 12, 12);
+	transition:1s;
+}
+
+/*our-team-main*/
+
+h1{
+	font-size: 60px;
+	font-style: italic;
+}
+p{
+	color: wheat;
+}
+a{
+	color: black;
+}
