@@ -21,6 +21,7 @@ namespace KitchenApp.Models
             }
         }
 
+       // public Guid PaymentId { get; set; }
         public virtual Payment Payment { get; set; }
         public Guid OrderDetailId { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }
