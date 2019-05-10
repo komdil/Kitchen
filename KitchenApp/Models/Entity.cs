@@ -9,9 +9,9 @@ namespace KitchenApp.Models
     public class Entity
     {
         public KitchenAppContext Context { get; }
-        public Entity(KitchenAppContext _context)
+        public Entity()
         {
-            Context = _context;
+            //Context = _context;
         }
     }
 }

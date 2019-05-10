@@ -9,7 +9,7 @@ namespace KitchenApp.Models
     {
         Guid id;
 
-        public User(KitchenAppContext _context):base(_context)
+        public User()
         {
         }
 

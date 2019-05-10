@@ -8,7 +8,7 @@ namespace KitchenApp.Models
 {
     public class Admin : User
     {
-        public Admin(KitchenAppContext _context) : base(_context)
+        public Admin()
         {
         }
 
