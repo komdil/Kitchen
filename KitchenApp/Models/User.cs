@@ -7,29 +7,7 @@ namespace KitchenApp.Models
 {
     public class User : Entity
     {
-        Guid id;
-        protected KitchenAppContext Context { get; }
-
-        public User()
-        {
-            Context = GetContext();
-        }
-
-        public Guid Id
-        {
-            get
-            {
-                if (id == null || id == Guid.Empty)
-                {
-                    id = new Guid();
-                }
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
-        }
+        protected KitchenAppContext Context => GetContext();
 
         public void AcceptMenu(Menu menu)
         {
