@@ -14,7 +14,7 @@ namespace KitchenApp.Models
 
         Menu GetTodaysMenu()
         {
-           return Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.Menu;
+            return Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.Menu;
         }
         public void AddNewUser(User user)
         {
@@ -27,15 +27,25 @@ namespace KitchenApp.Models
         }
         public void SelectMenuForToday(Menu menu)
         {
-            Order order = new Order() {Id= new Guid(), Date = DateTime.Today};
-            order.Menu = menu;                
-            menu.Orders.Add(order);
+            if (Context.Orders.Any(o => o.Date == DateTime.Today))
+            {
+                throw new Exception("You have been already choosed menu for today!");
+            }
+            else
+            {
+                Order order = new Order() { Id = new Guid(), Date = DateTime.Today };
+                order.Menu = menu;
+                menu.Orders.Add(order);
+                Context.Orders.Add(order);
+                Context.Menus.Add(menu);
+                Context.SaveChanges();
+            }
         }
         public override string Role { get { return Helper.ADMIN_ROLE; } }
 
         public void SetPrice(decimal price)
         {
-            if(Details.FirstOrDefault().Order != null)
+            if (Details.FirstOrDefault().Order != null)
             {
                 Details.FirstOrDefault().Order.Price = price;
             }
@@ -53,10 +63,11 @@ namespace KitchenApp.Models
         public void CloseOrderOfToday()
         {
             var menu = GetTodaysMenu();
-            if (menu!=null)
+            if (menu != null)
             {
                 var order = menu.Orders.Single(a => a.Date == DateTime.Today);
-                order.IsClosed = true;
+                order.IsClosed = (!order.IsClosed) ? true : throw new Exception("Menu have been already closed!");
+                Context.SaveChanges();
             }
             else
             {

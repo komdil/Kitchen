@@ -9,6 +9,6 @@ namespace KitchenApp.Models
     {
         public const string ADMIN_ROLE = "Admin";
         public const string USER_ROLE = "User";
-        public static string ConnectionString { get; set; }
+        public static string ConnectionString { get; set; } = "Server=DESKTOP-GL612FN\\SQLSERVER;Database=KitchenAppDb;Trusted_Connection=True;";
     }
 }

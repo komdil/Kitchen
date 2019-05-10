@@ -8,9 +8,11 @@ namespace KitchenApp.Models
     public class User : Entity
     {
         Guid id;
+        protected KitchenAppContext Context { get; }
 
         public User()
         {
+            Context = GetContext();
         }
 
         public Guid Id
