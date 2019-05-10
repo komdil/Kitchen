@@ -8,13 +8,14 @@ namespace KitchenApp.Models
 {
     public class Admin : User
     {
-        public Admin()
+        public Admin(KitchenAppContext context):base(context)
         {
         }
 
         public Menu GetTodaysMenu()
         {
-            return Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.Menu;
+            var idMenu= Context.Orders.Local.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
+            return Context.Menus.Local.FirstOrDefault(d => d.Id == idMenu);
         }
         public void AddNewUser(User user)
         {

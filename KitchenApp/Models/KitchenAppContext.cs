@@ -90,11 +90,10 @@ namespace KitchenApp.DateProvider
 
         public override int SaveChanges()
         {
-            if (!IsUnitTest)
-            {
-                return base.SaveChanges();
-            }
-            return 0;
+           
+            if (IsUnitTest)
+                return 0;
+            return base.SaveChanges();
         }
     }
 }

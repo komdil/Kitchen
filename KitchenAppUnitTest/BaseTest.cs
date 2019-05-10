@@ -12,12 +12,15 @@ namespace KitchenAppUnitTest
     public abstract class BaseTest
     {
         public KitchenAppContext Context { get; set; }
+        protected Admin testAdmin { get; set; }
+         
 
         [TestInitialize]
         public void TestInitialized()
         {
             Context = GetContext();
             Context.IsUnitTest = true;
+            testAdmin = new Admin(Context);
         }
         public KitchenAppContext GetContext()
         {

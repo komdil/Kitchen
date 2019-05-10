@@ -7,8 +7,10 @@ namespace KitchenApp.Models
 {
     public class User : Entity
     {
-        protected KitchenAppContext Context => GetContext();
+        public User(KitchenAppContext context):base(context)
+        {
 
+        }
         public void AcceptMenu(Menu menu)
         {
             if (menu.Orders.Count != 0)//order created

@@ -11,11 +11,10 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void SelectMenu()
         {
-            Admin admin = new Admin();
-            Menu menu = new Menu() { Id = new Guid(), Name = "plov" };
+            Menu menu = new Menu() { Id = Guid.NewGuid(), Name = "plov" };
             try
             {
-                admin.SelectMenuForToday(menu);
+                testAdmin.SelectMenuForToday(menu);
                 Assert.AreEqual(1, menu.Orders.Count, "If menu choosed, we must create Order object and list of orders in Menu class should be equal to 1");
                 Order order = menu.Orders.Single(d => d.Date == DateTime.Today);
                 Assert.AreEqual(menu, order.Menu, "Field Menu of Order class must be equal to choosed menu!");
@@ -33,7 +32,7 @@ namespace KitchenAppUnitTest
             var seletedMenu = admin.GetTodaysMenu();
             if (seletedMenu == null)
             {
-                Menu menu = new Menu() { Id = new Guid(), Name = "plov" };
+                Menu menu = new Menu() { Id = Guid.NewGuid(), Name = "plov" };
                 admin.SelectMenuForToday(menu);
             }
         }
@@ -41,46 +40,44 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void CloseOrderTest()
         {
-            Admin admin = new Admin();
-            SelectMenuIfNotSelected(admin);
-            admin.CloseOrderOfToday();
-            Order order = Context.Orders.FirstOrDefault(o => o.Date == DateTime.Today);
+            SelectMenuIfNotSelected(testAdmin);
+
+            testAdmin.CloseOrderOfToday();
+            Order order = Context.Orders.Local.FirstOrDefault(o => o.Date == DateTime.Today);
             Assert.IsNotNull(order, "We cant close order, which was not created");
             Assert.IsTrue(order.IsClosed, "Order should be closed!");
 
             Exception orderIsAlreadyClosedException = null;
             try
             {
-                admin.CloseOrderOfToday();
+                testAdmin.CloseOrderOfToday();
             }
             catch (Exception ex)
             {
                 orderIsAlreadyClosedException = ex;
             }
-            Assert.IsNotNull(orderIsAlreadyClosedException, "");
+            Assert.IsNotNull(orderIsAlreadyClosedException, "We must notify admin with some message!");
         }
 
         [TestMethod]
         public void SetPrice()
         {
-            Admin admin = new Admin();
             decimal price = 105.20M;
-            admin.SetPrice(price);
+            testAdmin.SetPrice(price);
 
-            Assert.IsNotNull(admin.Details.FirstOrDefault(), "We should have OrderDetails to get Order!");
-            Assert.IsNotNull(admin.Details.FirstOrDefault().Order, "We should have created order to which we can set price!");
-            Assert.AreEqual(price, admin.Details.FirstOrDefault().Order.Price, "Price should be equal to setted value!");
+            Assert.IsNotNull(testAdmin.Details.FirstOrDefault(), "We should have OrderDetails to get Order!");
+            Assert.IsNotNull(testAdmin.Details.FirstOrDefault().Order, "We should have created order to which we can set price!");
+            Assert.AreEqual(price, testAdmin.Details.FirstOrDefault().Order.Price, "Price should be equal to setted value!");
         }
 
         [TestMethod]
         public void AddPayment()
         {
-            Admin admin = new Admin();
-            User user = new User();
+            User user = new User(Context);
             decimal amount = 10.50M;
-            admin.AddPayment(user, amount);
+            testAdmin.AddPayment(user, amount);
 
-            Assert.IsTrue(admin.Payments.Any(x => x.User == user && x.Amount == amount), "If user payed, this info should saved in list of payments!");
+            Assert.IsTrue(testAdmin.Payments.Any(x => x.User == user && x.Amount == amount), "If user payed, this info should saved in list of payments!");
         }
     }
 }

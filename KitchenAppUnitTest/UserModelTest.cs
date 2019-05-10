@@ -11,7 +11,7 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void AcceptMenu()
         {
-            User user = new User();
+            User user = new User(Context);
             Menu menu = new Menu();
             try
             {
