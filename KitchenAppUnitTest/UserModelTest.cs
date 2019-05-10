@@ -6,7 +6,7 @@ using System.Linq;
 namespace KitchenAppUnitTest
 {
     [TestClass]
-    public class UserModelTest
+    public class UserModelTest : BaseTest
     {
         [TestMethod]
         public void AcceptMenu()

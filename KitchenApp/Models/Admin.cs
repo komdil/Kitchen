@@ -12,7 +12,7 @@ namespace KitchenApp.Models
         {
         }
 
-        Menu GetTodaysMenu()
+        public Menu GetTodaysMenu()
         {
             return Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.Menu;
         }
@@ -35,9 +35,7 @@ namespace KitchenApp.Models
             {
                 Order order = new Order() { Id = new Guid(), Date = DateTime.Today };
                 order.Menu = menu;
-                menu.Orders.Add(order);
                 Context.Orders.Add(order);
-                Context.Menus.Add(menu);
                 Context.SaveChanges();
             }
         }
@@ -66,7 +64,7 @@ namespace KitchenApp.Models
             if (menu != null)
             {
                 var order = menu.Orders.Single(a => a.Date == DateTime.Today);
-                order.IsClosed = (!order.IsClosed) ? true : throw new Exception("Menu have been already closed!");
+                order.IsClosed = (!order.IsClosed) ? true : throw new Exception("Menu has been already closed!");
                 Context.SaveChanges();
             }
             else
