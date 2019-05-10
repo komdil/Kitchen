@@ -40,6 +40,7 @@ namespace KitchenAppUnitTest
             Admin admin = new Admin();
             Menu menu = new Menu() { Id = new System.Guid(), Name = "plov" };
             admin.SelectMenuForToday(menu);
+
             try
             {
                 admin.CloseOrderOfToday();
