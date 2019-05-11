@@ -7,7 +7,11 @@ namespace KitchenApp.Models
 {
     public class User : Entity
     {
-        public User(KitchenAppContext context):base(context)
+        public User(KitchenAppContext context) : base(context)
+        {
+
+        }
+        public User() : base()
         {
 
         }
@@ -15,7 +19,7 @@ namespace KitchenApp.Models
         {
             if (menu.Orders.Count != 0)//order created
             {
-                OrderDetail orderDetail = new OrderDetail() { Id = new Guid(), User = this, Order = menu.Orders.First() };
+                OrderDetail orderDetail = new OrderDetail(Context) { Id = new Guid(), User = this, Order = menu.Orders.First() };
                 menu.Orders.First().Details.Add(orderDetail);
             }
             else throw new Exception("Order is not created");
