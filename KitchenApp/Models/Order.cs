@@ -24,9 +24,9 @@ namespace KitchenApp.Models
         public DateTime Date { get; set; }
         public Guid MenuId { get; set; }
         public virtual Menu Menu { get; set; }
-        public virtual bool IsClosed { get; set; }
+        public  bool IsClosed { get; set; }
         public decimal Price { get; set; }
         public virtual int PeopleCount { get { return Details.Count; } }
-        public virtual List<OrderDetail> Details { get; set; }
+        public virtual List<OrderDetail> Details { get; set; } = new List<OrderDetail>();
     }
 }

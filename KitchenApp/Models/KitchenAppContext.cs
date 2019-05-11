@@ -5,6 +5,7 @@ namespace KitchenApp.DateProvider
 {
     public class KitchenAppContext : DbContext
     {
+        public bool IsUnitTest { get; set; } = false;
         public KitchenAppContext(DbContextOptions<KitchenAppContext> options)
             : base(options)
         {
@@ -86,6 +87,14 @@ namespace KitchenApp.DateProvider
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Entity> Entities { get; set; }
         public DbSet<PaymentDetail> PaymentDetails { get; set; }
+
+        public override int SaveChanges()
+        {
+           
+            if (IsUnitTest)
+                return 0;
+            return base.SaveChanges();
+        }
     }
 }
 

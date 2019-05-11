@@ -23,9 +23,10 @@ namespace KitchenApp.Models
                 id = value;
             }
         }
+        //TODO There should be payment status bool type (IsPaid)
         public DateTime DateTime { get; set; }
-        public int Amount { get; set; }
-        public virtual List<PaymentDetail> Details { get; set; }
+        public decimal Amount { get; set; }
+        public virtual List<PaymentDetail> Details { get; set; } = new List<PaymentDetail>();
         public virtual User User { get; set; }
         public Guid UserId { get; set; }
     }

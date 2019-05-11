@@ -22,12 +22,10 @@ namespace KitchenApp.Models
                 id = value;
             }
         }
-
-        public KitchenAppContext GetContext()
+        public Entity(KitchenAppContext context)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<KitchenAppContext>();
-            optionsBuilder.UseSqlServer(Helper.ConnectionString);
-            return new KitchenAppContext(optionsBuilder.Options);
+            Context = context;
         }
+        public KitchenAppContext Context;
     }
 }
