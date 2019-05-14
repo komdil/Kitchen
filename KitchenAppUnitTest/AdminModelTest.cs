@@ -71,6 +71,9 @@ namespace KitchenAppUnitTest
             Order currentOrder = orders.SingleOrDefault(o => o.Id == order.Id);
             Assert.IsNotNull(currentOrder, "Passed order should be exist!");
             Assert.AreEqual(price, currentOrder.Price, "Price should be equal to setted value!");
+
+            decimal pricePerPerson = price / order.PeopleCount;
+
         }
 
         [TestMethod]

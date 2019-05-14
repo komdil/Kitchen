@@ -15,16 +15,13 @@ namespace KitchenApp.Models
         {
 
         }
-        public void AcceptMenu(Menu menu)
-        {
-            if (menu.Orders.Count != 0)//order created
-            {
-                OrderDetail orderDetail = new OrderDetail(Context) { Id = new Guid(), User = this, Order = menu.Orders.First() };
-                menu.Orders.First().Details.Add(orderDetail);
-            }
-            else throw new Exception("Order is not created");
+        public void AcceptMenu(Order order)
+        {            
+            OrderDetail orderDetail = new OrderDetail(Context) {User = this, Order = order };
+            order.Details.Add(orderDetail);
+            Context.SaveChanges();
         }
-
+        public decimal Balance { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

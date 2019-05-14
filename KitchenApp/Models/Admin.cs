@@ -24,8 +24,6 @@ namespace KitchenApp.Models
         }
         public List<Order> GetListOfOrders() => Context.Orders.ToList();
 
-        public List<Payment> GetPayments() => Context.Payments.ToList();
-
         public void AddNewUser(User user)
         {
             throw new NotImplementedException();
@@ -55,15 +53,19 @@ namespace KitchenApp.Models
         {
             //TODO Payment creation logic
             var currentOrder = Context.Orders.SingleOrDefault(o => o.Id == order.Id);
-            if (currentOrder == null)
-                throw new OrderDoesNotExistException();
-            else if (currentOrder.Price != 0)
+            if (currentOrder.Price != 0)
             {
                 throw new PriceAlreadySetException();
             }
             else
             {
                 currentOrder.Price = price;
+
+                decimal pricePerPerson = price / order.PeopleCount;
+                foreach(var detail in order.Details)
+                {
+                    detail.User.Balance -= pricePerPerson;
+                }
                 Context.SaveChanges();
             }
         }
