@@ -1,25 +1,19 @@
-﻿using System;
+﻿using KitchenApp.DateProvider;
+using System;
 using System.Collections.Generic;
 
 namespace KitchenApp.Models
 {
-    public class OrderDetail
+    public class OrderDetail : Entity
     {
-        Guid id;
-        public Guid Id
+        public OrderDetail(KitchenAppContext context) : base(context)
         {
-            get
-            {
-                if (id == null || id == Guid.Empty)
-                {
-                    id = new Guid();
-                }
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
+
+        }
+
+        public OrderDetail() : base()
+        {
+
         }
         public Guid UserId { get; set; }
         public virtual User User { get; set; }

@@ -6,13 +6,13 @@ using System.Linq;
 namespace KitchenAppUnitTest
 {
     [TestClass]
-    public class UserModelTest : BaseTest
+    public class UserModelTest : BaseTest<User>
     {
         [TestMethod]
         public void AcceptMenu()
         {
             User user = new User(Context);
-            Menu menu = new Menu();
+            Menu menu = new Menu(Context);
             try
             {
                 user.AcceptMenu(menu);

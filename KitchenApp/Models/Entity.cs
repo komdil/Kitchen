@@ -1,6 +1,11 @@
-﻿using KitchenApp.DateProvider;
+﻿using JetBrains.Annotations;
+using KitchenApp.DateProvider;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace KitchenApp.Models
 {
@@ -13,7 +18,7 @@ namespace KitchenApp.Models
             {
                 if (id == null || id == Guid.Empty)
                 {
-                    id = new Guid();
+                    id = Guid.NewGuid();
                 }
                 return id;
             }
@@ -22,9 +27,15 @@ namespace KitchenApp.Models
                 id = value;
             }
         }
+
         public Entity(KitchenAppContext context)
         {
             Context = context;
+        }
+
+        public Entity()
+        {
+
         }
         public KitchenAppContext Context;
     }

@@ -1,27 +1,19 @@
-﻿using System;
+﻿using KitchenApp.DateProvider;
+using System;
 
 namespace KitchenApp.Models
 {
-    public class PaymentDetail
+    public class PaymentDetail : Entity
     {
-        Guid id;
-        public Guid Id
+        public PaymentDetail(KitchenAppContext context) : base(context)
         {
-            get
-            {
-                if (id == null || id == Guid.Empty)
-                {
-                    id = new Guid();
-                }
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
+
         }
 
-       // public Guid PaymentId { get; set; }
+        public PaymentDetail() : base()
+        {
+
+        }
         public virtual Payment Payment { get; set; }
         public Guid OrderDetailId { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }

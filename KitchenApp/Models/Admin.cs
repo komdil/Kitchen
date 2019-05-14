@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KitchenApp.DateProvider;
+using KitchenApp.Models.Exceptions;
 
 namespace KitchenApp.Models
 {
     public class Admin : User
     {
-        public Admin(KitchenAppContext context):base(context)
+        public Admin(KitchenAppContext context) : base(context)
         {
-        }
 
+        }
+        public Admin():base()
+        {
+
+        }
         public Menu GetTodaysMenu()
         {
-            var idMenu= Context.Orders.Local.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
-            return Context.Menus.Local.FirstOrDefault(d => d.Id == idMenu);
+            var idMenu = Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
+            return Context.Menus.FirstOrDefault(d => d.Id == idMenu);
         }
         public void AddNewUser(User user)
         {
@@ -30,11 +35,11 @@ namespace KitchenApp.Models
         {
             if (Context.Orders.Any(o => o.Date == DateTime.Today))
             {
-                throw new Exception("You have been already choosed menu for today!");
+                throw new MenuAlreadySelectedException();
             }
             else
             {
-                Order order = new Order() { Id = new Guid(), Date = DateTime.Today };
+                Order order = new Order(Context) { Date = DateTime.Today };
                 order.Menu = menu;
                 Context.Orders.Add(order);
                 Context.SaveChanges();
@@ -52,8 +57,8 @@ namespace KitchenApp.Models
 
         public void AddPayment(User user, decimal amount)
         {
-            Payment payment = new Payment() { User = user, Amount = amount, DateTime = DateTime.Now };
-            PaymentDetail paymentDetail = new PaymentDetail() { Payment = payment, OrderDetail = this.Details.FirstOrDefault() };
+            Payment payment = new Payment(Context) { User = user, Amount = amount, DateTime = DateTime.Now };
+            PaymentDetail paymentDetail = new PaymentDetail(Context) { Payment = payment, OrderDetail = this.Details.FirstOrDefault() };
             payment.Details.Add(paymentDetail);
 
             Payments.Add(payment);
@@ -65,12 +70,12 @@ namespace KitchenApp.Models
             if (menu != null)
             {
                 var order = menu.Orders.Single(a => a.Date == DateTime.Today);
-                order.IsClosed = (!order.IsClosed) ? true : throw new Exception("Menu has been already closed!");
+                order.IsClosed = (!order.IsClosed) ? true : throw new OrderAlreadyClosedException();
                 Context.SaveChanges();
             }
             else
             {
-                throw new Exception("Menu was not selected for today");
+                throw new MenuWasNotSelectedForTodayException();
             }
         }
     }
