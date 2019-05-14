@@ -22,10 +22,11 @@ namespace KitchenAppUnitTest
             Menu menu = new Menu(Context) { Name = "plov" };
             TestEntity.SelectMenuForToday(menu);
             Assert.AreEqual(1, menu.Orders.Count, "If menu choosed, we must create Order object and list of orders in Menu class should be equal to 1");
-            Order order = menu.Orders.Single(d => d.Date == DateTime.Today);
+            Order order = menu.Orders.Single();
+            Assert.AreEqual(DateTime.Today, order.Date);
             Assert.AreEqual(menu, order.Menu, "Field Menu of Order class must be equal to choosed menu!");
             Assert.AreEqual(0, order.PeopleCount, "When Order created, count of people, who choosed this menu should be equal to 0");
-            Assert.AreEqual(false, order.IsClosed, "When Order created, Closed field should be false");
+            Assert.IsFalse(order.IsClosed, "When Order created, Closed field should be false");
 
             TestEntity.SelectMenuForToday(menu); //There should be exception
         }
@@ -58,9 +59,10 @@ namespace KitchenAppUnitTest
         public void SetPrice()
         {
             SelectMenuIfNotSelected(TestEntity);
-            Order order = Context.Orders.FirstOrDefault(o => o.Date == DateTime.Today);
+            Order order = Context.Orders.Single(o => o.Date == DateTime.Today);
 
             decimal price = 105.20M;
+            //TODO Payment creation test
             TestEntity.SetPrice(order, price);
 
             List<Order> orders = TestEntity.GetListOfOrders();
@@ -77,10 +79,10 @@ namespace KitchenAppUnitTest
             SelectMenuIfNotSelected(TestEntity);
             Order order = Context.Orders.FirstOrDefault(o => o.Date == DateTime.Today);
 
-            User user = new User(Context) {FirstName="Axe"};
+            User user = new User(Context) { FirstName = "Axe" };
             decimal amount = 10.50M;
             OrderDetail orderDetail = new OrderDetail(Context) { User = user, Order = order };
-
+            //TODO Improve test of payment
             TestEntity.AddPayment(orderDetail, amount);
             Payment payment = user.Payments.SingleOrDefault(p => p.Amount == amount);
             Assert.IsNotNull(payment, "Passed user should have any payment with setted amount");

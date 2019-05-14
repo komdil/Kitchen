@@ -53,6 +53,7 @@ namespace KitchenApp.Models
 
         public void SetPrice(Order order, decimal price)
         {
+            //TODO Payment creation logic
             var currentOrder = Context.Orders.SingleOrDefault(o => o.Id == order.Id);
             if (currentOrder == null)
                 throw new OrderDoesNotExistException();
