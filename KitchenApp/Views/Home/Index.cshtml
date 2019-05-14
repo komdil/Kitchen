@@ -2,7 +2,46 @@
 
 @if (User.IsInRole("Admin"))
 {
-    @Html.ActionLink("Admin Page", "Index", "Admin", "http", null, null, null, null)
 
-    @Html.ActionLink("User Page", "Index", "User", "http", null, null, null, null)
+
+
+   
+   
 }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Kitchen</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/css//bootstrap.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <!-- Custom styles for this template -->
+    <link href="~/css/agency.css" rel="stylesheet">
+</head>
+<body id="page-top">
+
+    <!-- Header -->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Welcome To Kitchen!</div>
+                <div class="intro-heading text-uppercase">It's Nice To Meet You</div>
+                <div class="admin">
+
+                </div>
+                <button type="button" class="btn btn-outline-warning">
+                    @Html.ActionLink("Admin Page", "Index", "Admin", "http", null, null, null, null)
+                </button>
+                <button type="button" class="btn btn-outline-warning"> @Html.ActionLink("User Page", "Index", "User", "http", null, null, null, null)</button>
+
+            </div>
+        </div>
+    </header>
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+
+</body>
