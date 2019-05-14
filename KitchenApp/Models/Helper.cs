@@ -9,6 +9,7 @@ namespace KitchenApp.Models
     {
         public const string ADMIN_ROLE = "Admin";
         public const string USER_ROLE = "User";
-        public static string ConnectionString { get; set; }
+        public const string DATABASE = "KitchenAppDb";
+        public const string CONNECTION_STRING = "Server=(localdb)\\MSSQLLocalDB;Database=KitchenAppDb;Trusted_Connection=True;";
     }
 }

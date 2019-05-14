@@ -26,7 +26,6 @@ namespace KitchenApp.DateProvider
         void OrderMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<Order>();
-            etBuilder.HasKey(o => new { o.Id });
             etBuilder.HasOne(o => o.Menu).WithMany(a => a.Orders).HasForeignKey(f => f.MenuId);
             etBuilder.HasMany(o => o.Details).WithOne(d => d.Order).HasForeignKey(f => f.OrderId);
         }
@@ -34,7 +33,6 @@ namespace KitchenApp.DateProvider
         void MenuMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<Menu>();
-            etBuilder.HasKey(m => new { m.Id });
             etBuilder.HasMany(m => m.Orders).WithOne(d => d.Menu).HasForeignKey(f => f.MenuId);
         }
 
@@ -59,21 +57,18 @@ namespace KitchenApp.DateProvider
         void PaymentMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<Payment>();
-            etBuilder.HasKey(p => new { p.Id });
             etBuilder.HasOne(p => p.User).WithMany(m => m.Payments).HasForeignKey(f => f.UserId);
             etBuilder.HasMany(p => p.Details).WithOne(d => d.Payment);
         }
         void OrderDetailMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<OrderDetail>();
-            etBuilder.HasKey(o => new { o.Id });
             etBuilder.HasOne(o => o.User);
             etBuilder.HasMany(o => o.Payments).WithOne(d => d.OrderDetail).HasForeignKey(f => f.OrderDetailId);
         }
         void PaymentDetailMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<PaymentDetail>();
-            etBuilder.HasKey(p => new { p.Id });
             etBuilder.HasOne(p => p.OrderDetail).WithMany(m => m.Payments).HasForeignKey(f => f.OrderDetailId);
             etBuilder.HasOne(p => p.Payment).WithMany(m => m.Details);
         }
