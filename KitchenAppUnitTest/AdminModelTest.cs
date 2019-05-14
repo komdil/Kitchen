@@ -3,6 +3,7 @@ using KitchenApp.Models;
 using KitchenApp.Models.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 namespace KitchenAppUnitTest
 {
@@ -56,22 +57,35 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void SetPrice()
         {
-            decimal price = 105.20M;
-            TestEntity.SetPrice(price);
+            SelectMenuIfNotSelected(TestEntity);
+            Order order = Context.Orders.FirstOrDefault(o => o.Date == DateTime.Today);
 
-            Assert.IsNotNull(TestEntity.Details.FirstOrDefault(), "We should have OrderDetails to get Order!");
-            Assert.IsNotNull(TestEntity.Details.FirstOrDefault().Order, "We should have created order to which we can set price!");
-            Assert.AreEqual(price, TestEntity.Details.FirstOrDefault().Order.Price, "Price should be equal to setted value!");
+            decimal price = 105.20M;
+            TestEntity.SetPrice(order, price);
+
+            List<Order> orders = TestEntity.GetListOfOrders();
+            Assert.AreNotEqual(0, orders.Count, "We should have created order to which we can set price!");
+
+            Order currentOrder = orders.SingleOrDefault(o => o.Id == order.Id);
+            Assert.IsNotNull(currentOrder, "Passed order should be exist!");
+            Assert.AreEqual(price, currentOrder.Price, "Price should be equal to setted value!");
         }
 
         [TestMethod]
         public void AddPayment()
         {
-            User user = new User(Context);
-            decimal amount = 10.50M;
-            TestEntity.AddPayment(user, amount);
+            SelectMenuIfNotSelected(TestEntity);
+            Order order = Context.Orders.FirstOrDefault(o => o.Date == DateTime.Today);
 
-            Assert.IsTrue(TestEntity.Payments.Any(x => x.User == user && x.Amount == amount), "If user payed, this info should saved in list of payments!");
+            User user = new User(Context) {FirstName="Axe"};
+            decimal amount = 10.50M;
+            OrderDetail orderDetail = new OrderDetail(Context) { User = user, Order = order };
+
+            TestEntity.AddPayment(orderDetail, amount);
+            Payment payment = user.Payments.SingleOrDefault(p => p.Amount == amount);
+            Assert.IsNotNull(payment, "Passed user should have any payment with setted amount");
+            //Assert.IsNotNull(payment.Details.Any(pd => pd.OrderDetail == orderDetail,"Payment ");
+            Assert.IsTrue(user.Payments.Any(x => x.Amount == amount), "If user payed, this info should saved in list of payments!");
         }
     }
 }

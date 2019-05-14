@@ -30,7 +30,7 @@ namespace KitchenApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public virtual bool IsAdmin { get { return this is Admin; } }
-        public virtual List<Payment> Payments { get; set; }
+        public virtual List<Payment> Payments { get; set; } = new List<Payment>();
         public virtual List<OrderDetail> Details { get; set; } = new List<OrderDetail>();
 
         public virtual string Role { get { return Helper.USER_ROLE; } }

@@ -13,7 +13,7 @@ namespace KitchenApp.Models
         {
 
         }
-        public Admin():base()
+        public Admin() : base()
         {
 
         }
@@ -22,6 +22,10 @@ namespace KitchenApp.Models
             var idMenu = Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
             return Context.Menus.FirstOrDefault(d => d.Id == idMenu);
         }
+        public List<Order> GetListOfOrders() => Context.Orders.ToList();
+
+        public List<Payment> GetPayments() => Context.Payments.ToList();
+
         public void AddNewUser(User user)
         {
             throw new NotImplementedException();
@@ -47,21 +51,36 @@ namespace KitchenApp.Models
         }
         public override string Role { get { return Helper.ADMIN_ROLE; } }
 
-        public void SetPrice(decimal price)
+        public void SetPrice(Order order, decimal price)
         {
-            if (Details.FirstOrDefault().Order != null)
+            var currentOrder = Context.Orders.SingleOrDefault(o => o.Id == order.Id);
+            if (currentOrder == null)
+                throw new OrderDoesNotExistException();
+            else if (currentOrder.Price != 0)
             {
-                Details.FirstOrDefault().Order.Price = price;
+                throw new PriceAlreadySetException();
+            }
+            else
+            {
+                currentOrder.Price = price;
+                Context.SaveChanges();
             }
         }
 
-        public void AddPayment(User user, decimal amount)
+        public void AddPayment(OrderDetail orderDetail, decimal amount)
         {
-            Payment payment = new Payment(Context) { User = user, Amount = amount, DateTime = DateTime.Now };
-            PaymentDetail paymentDetail = new PaymentDetail(Context) { Payment = payment, OrderDetail = this.Details.FirstOrDefault() };
-            payment.Details.Add(paymentDetail);
+            Order currentOrder = Context.Orders.SingleOrDefault(o => o.Id == orderDetail.Order.Id);
+            if (currentOrder == null)
+                throw new OrderDoesNotExistException();
+            else
+            {
+                Payment payment = new Payment(Context) { User = orderDetail.User, Amount = amount, DateTime = DateTime.Now };
+                PaymentDetail paymentDetail = new PaymentDetail(Context) { Payment = payment, OrderDetail = orderDetail };
+                payment.Details.Add(paymentDetail);
 
-            Payments.Add(payment);
+                orderDetail.User.Payments.Add(payment);
+                Context.SaveChanges();
+            }
         }
 
         public void CloseOrderOfToday()
