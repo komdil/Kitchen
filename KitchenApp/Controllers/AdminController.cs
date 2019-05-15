@@ -18,16 +18,10 @@ namespace KitchenApp.Controllers
         public IActionResult Users() => View();
         public IActionResult Orders() => View();
         public IActionResult Payments() => View();
-
         public IActionResult Menus() => View();
-
         public IActionResult CreateNewMenu() => View();
-        public IActionResult DeleteMenu() => View();
-
         public IActionResult SelectMenuForToday() => View();
-
-        public IActionResult CreateNewUser() => View();
-
+        public IActionResult AddUser() => View();
         public IActionResult DeleteUser() => View();
         public IActionResult ChahgeUser() => View();
 
@@ -45,5 +39,6 @@ namespace KitchenApp.Controllers
 
 
 
+        public IActionResult CreateOrder() => View();
     }
 }
