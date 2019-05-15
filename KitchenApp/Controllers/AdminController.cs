@@ -22,14 +22,19 @@ namespace KitchenApp.Controllers
         public IActionResult Menus() => View();
 
         public IActionResult CreateNewMenu() => View();
+        public IActionResult DeleteMenu() => View();
 
         public IActionResult SelectMenuForToday() => View();
 
-        public IActionResult AddUser() => View();
+        public IActionResult CreateNewUser() => View();
 
         public IActionResult DeleteUser() => View();
-        public IActionResult CreateOrder() => View();
+        public IActionResult ChahgeUser() => View();
 
+        public IActionResult CreateNewOrder() => View();
+        public IActionResult ChahgeOrder() => View();
+        
+        public IActionResult DeleteOrder() => View();
 
 
 
