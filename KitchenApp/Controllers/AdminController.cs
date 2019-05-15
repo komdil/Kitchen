@@ -17,7 +17,7 @@ namespace KitchenApp.Controllers
         public IActionResult Index() => View();
         public IActionResult Users() => View();
         public IActionResult Orders() => View();
-
+        public IActionResult Payments() => View();
 
         public IActionResult Menus() => View();
 
@@ -28,7 +28,7 @@ namespace KitchenApp.Controllers
         public IActionResult AddUser() => View();
 
         public IActionResult DeleteUser() => View();
-        public IActionResult MakeOrder() => View();
+        public IActionResult CreateOrder() => View();
 
 
 

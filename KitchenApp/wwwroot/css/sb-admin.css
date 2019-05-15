@@ -66,6 +66,9 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important;
 }
+p{
+    margin-left:10px;
+}
 
 hr {
   -webkit-box-sizing: content-box;

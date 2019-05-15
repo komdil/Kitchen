@@ -15,7 +15,8 @@ namespace KitchenApp.Controllers
 
         public IActionResult Index() => View();
 
-        public IActionResult MakePayments() => View();
+
+        public IActionResult LookPayments() => View();
 
 
 
