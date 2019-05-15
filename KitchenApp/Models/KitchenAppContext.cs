@@ -8,7 +8,6 @@ namespace KitchenApp.DateProvider
         public KitchenAppContext(DbContextOptions<KitchenAppContext> options)
             : base(options)
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
             BlankData.CreateBlankData(this);
         }
