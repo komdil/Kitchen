@@ -1,32 +1,25 @@
-﻿using System;
+﻿using KitchenApp.DateProvider;
+using System;
 using System.Collections.Generic;
 
 namespace KitchenApp.Models
 {
-    public class Order
+    public class Order : Entity
     {
-        Guid id;
-        public Guid Id
+        public Order(KitchenAppContext context) : base(context)
         {
-            get
-            {
-                if (id == null || id == Guid.Empty)
-                {
-                    id = new Guid();
-                }
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
+
+        }
+        public Order() : base()
+        {
+
         }
         public DateTime Date { get; set; }
         public Guid MenuId { get; set; }
         public virtual Menu Menu { get; set; }
-        public virtual bool IsClosed { get; set; }
+        public bool IsClosed { get; set; }
         public decimal Price { get; set; }
         public virtual int PeopleCount { get { return Details.Count; } }
-        public virtual List<OrderDetail> Details { get; set; }
+        public virtual List<OrderDetail> Details { get; set; } = new List<OrderDetail>();
     }
 }

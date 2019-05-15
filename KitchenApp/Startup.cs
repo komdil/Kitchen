@@ -21,10 +21,7 @@ namespace KitchenApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<KitchenAppContext>(options => options.UseSqlServer(connection));
-
-            Helper.ConnectionString = connection;
+            services.AddDbContext<KitchenAppContext>(options => options.UseSqlServer(Helper.CONNECTION_STRING));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
