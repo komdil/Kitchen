@@ -13,9 +13,13 @@ namespace KitchenApp.Controllers
             appContext = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
+
+        public IActionResult MakePayments() => View();
+
+
+
+
+
     }
 }

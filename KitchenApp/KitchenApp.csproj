@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
     <Folder Include="Views\Home\Component\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>

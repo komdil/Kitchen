@@ -2,6 +2,7 @@
 using KitchenApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace KitchenApp.Controllers
 {
@@ -13,9 +14,31 @@ namespace KitchenApp.Controllers
         {
             this.appContext = appContext;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
+        public IActionResult Users() => View();
+        public IActionResult Orders() => View();
+
+
+        public IActionResult Menus() => View();
+
+        public IActionResult CreateNewMenu() => View();
+
+        public IActionResult SelectMenuForToday() => View();
+
+        public IActionResult AddUser() => View();
+
+        public IActionResult DeleteUser() => View();
+        public IActionResult MakeOrder() => View();
+
+
+
+
+
+
+
+
+
+
+
     }
 }

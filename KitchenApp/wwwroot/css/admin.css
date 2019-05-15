@@ -25,8 +25,9 @@ text-decoration:none;
 .fa{
    color:#4183D7;
 }
-h1{
-  margin-top: 20px;
+h1 {
+    margin-top: 20px;
+    color: white;
 }
 p {
     color: #222D32;
