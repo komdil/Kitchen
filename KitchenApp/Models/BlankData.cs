@@ -14,8 +14,12 @@ namespace KitchenApp.Models
                     FirstName = "Administrator",
                     LastName = "Administrator",
                     Login = "Administrator",
-                    Password = "Administrator",
+
                 };
+                var salt = Helper.SaltGenerate();
+                var passwordHash = Helper.HashPassword("Administrator", salt);
+                defaultAdmin.Salt = salt;
+                defaultAdmin.Password = passwordHash;
                 Context.Admins.Add(defaultAdmin);
             }
         }
