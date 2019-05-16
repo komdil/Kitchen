@@ -26,11 +26,23 @@ namespace KitchenApp.Controllers
             return View(menus);
         }
 
-        public IActionResult Users() => View();
-        public IActionResult Orders() => View();
+        public IActionResult Users()
+        {
+            var users = appContext.Users;
+
+            return View(users);
+        }
+        
+          public IActionResult Orders() => View();
         public IActionResult Payments() => View();
-        public IActionResult Menus() => View();
+        public IActionResult Menus()
+        {
+            var menus = appContext.Menus;
+
+            return View(menus);
+        }
         public IActionResult CreateNewMenu() => View();
+        public IActionResult UpdateMenu() => View();
         public IActionResult SelectMenuForToday() => View();
         public IActionResult AddUser() => View();
         public IActionResult DeleteUser() => View();
@@ -41,5 +53,7 @@ namespace KitchenApp.Controllers
 
         public IActionResult DeleteOrder() => View();
         public IActionResult CreateOrder() => View();
+       
+        
     }
 }

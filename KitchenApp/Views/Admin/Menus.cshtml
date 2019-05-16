@@ -2,38 +2,50 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<KitchenApp.Models.Menu>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(Model => Model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.Description)
-            </th>
-           
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in M)
-        {
+<form method="post" class="form">
+    <h3><a asp-action="CreateNewMenu"asp-controller="Admin" class="btn btn-sm btn-info">Create</a></h3>
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (Model == null)
+            {
+                <tr>
+                    <td colspan="7" class="text-center">No Model Data</td>
+                </tr>
+            }
+            else
+            {
+                int Id=0;
+                @foreach (var menu in Model)
+                {
+                    Id++;
+                    <tr>
+                        <td>@Id</td>
+                        <td>@menu.Name</td>
+                        <td>@menu.Description</td>
+                        
+                        <td><a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id">Update</a></td>
+                        
+                        
+                        <td>
+                             <button class="btn-link">Delete</button>
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</form>
