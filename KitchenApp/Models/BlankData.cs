@@ -1,4 +1,4 @@
-﻿using KitchenApp.DateProvider;
+﻿using KitchenApp.Models;
 using System.Linq;
 
 namespace KitchenApp.Models

@@ -1,10 +1,7 @@
-﻿using KitchenApp.DateProvider;
-using System;
+﻿using KitchenApp.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using KitchenApp.Models.Exceptions;
 
 namespace KitchenApp.Models
 {
@@ -22,10 +19,20 @@ namespace KitchenApp.Models
         {
             if (menu.Orders.Count != 0)//order created
             {
-                OrderDetail orderDetail = new OrderDetail(Context) { Id = new Guid(), User = this, Order = menu.Orders.First() };
+                OrderDetail orderDetail = new OrderDetail(Context) { User = this, Order = menu.Orders.First() };
                 menu.Orders.First().Details.Add(orderDetail);
             }
-            else throw new Exception("Order is not created");
+            else throw new MenuWasNotSelectedForTodayException();
+        }
+
+        public void RejectMenu(Menu menu)
+        {
+            OrderDetail orderDetail = menu.Orders.First().Details.FirstOrDefault(m => m.UserId == Id);
+            if (orderDetail != null)
+            {
+                Context.OrderDetails.Remove(orderDetail);
+                Context.SaveChanges();
+            }
         }
 
         public string Login { get; set; }

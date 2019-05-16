@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KitchenApp.DateProvider;
+using KitchenApp.Models;
 using KitchenApp.Models.Exceptions;
 
 namespace KitchenApp.Models

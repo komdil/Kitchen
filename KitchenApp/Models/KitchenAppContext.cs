@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using KitchenApp.Models;
 
-namespace KitchenApp.DateProvider
+namespace KitchenApp.Models
 {
     public class KitchenAppContext : DbContext
     {

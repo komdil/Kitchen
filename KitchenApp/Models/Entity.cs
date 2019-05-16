@@ -1,5 +1,5 @@
 ﻿using JetBrains.Annotations;
-using KitchenApp.DateProvider;
+using KitchenApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;

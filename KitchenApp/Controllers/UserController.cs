@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using KitchenApp.DateProvider;
+using KitchenApp.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace KitchenApp.Controllers
