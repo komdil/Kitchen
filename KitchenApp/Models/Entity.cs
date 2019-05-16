@@ -11,6 +11,7 @@ namespace KitchenApp.Models
 {
     public abstract class Entity
     {
+
         Guid id;
         public Guid Id
         {

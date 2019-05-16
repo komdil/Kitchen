@@ -1,111 +1,20 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model IEnumerable<KitchenApp.Models.Menu>
+<form class="form">
 
-<!DOCTYPE html>
+    <div class="form-group">
+        <       <h1 class="text-center">SelectMenuForToday </h1>
 
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Admin Page</title>
-
-    
-     <link href="~/css/bootstrap.css" rel="stylesheet" />
-
-    <!-- Custom styles for this template-->
-    <link href="~/css/admin.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-    <div class="text-center">
-        <h1>AdminPanel</h1>
+        <select class="form-control" id="exampleFormControlSelect1">
+            @foreach (var item in Model)
+            {
+                <option value="@Html.DisplayFor(modelItem => item.Id)">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </option>
+            }
+        </select>
     </div>
-    <div class="box">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-4 col-md-4 col-sm-4 col-xs-12">
-
-                    <div class="box-part text-center">
-
-                        <img src="~/images/user.png" alt="">
-                            
-                        <p>@Html.ActionLink("Users", "Users", "Admin", "http", null, null, null, null)</p>  
-                             
-
-
-
-                    </div>
-                </div>
-               
-
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                    <div class="box-part text-center">
-
-                        <img src="~/images/menu.png" alt="">
-
-                        <div class="title">
-                            <p>@Html.ActionLink("Menu", "Menus", "Admin", "http", null, null, null, null)</p>
-                        </div>
-
-
-
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                    <div class="box-part text-center">
-
-                        <img src="~/images/payment.png" alt="">
-
-                        <div class="title">
-                            <p>@Html.ActionLink("Payment", "Payments", "Admin", "http", null, null, null, null)</p>
-                        </div>
-
-
-
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                    <div class="box-part text-center">
-
-                        <img src="~/images/order.png" alt="">
-                        <div class="title">
-                            <p>@Html.ActionLink("Order", "Orders", "Admin", "http", null, null, null, null)</p>
-                            
-                        </div>
-
-
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-                    <div class="box-part text-center">
-
-                        <img src="~/images/exit.png" alt="">
-                        <div class="title">
-                            <p>@Html.ActionLink("Logout", "Logout", "Account", "http", null, null, null, null)  </p>
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-</body>
+</form>
