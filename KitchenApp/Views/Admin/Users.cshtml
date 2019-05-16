@@ -10,12 +10,11 @@
     <table class="table table-bordered table-sm table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Login</th>
-                <th>Password</th>
-
+            
                 <th></th>
                 <th></th>
             </tr>
@@ -29,22 +28,26 @@
             }
             else
             {
-                int Id = 0;
-                @foreach (var menu in Model)
+            
+                @foreach (var users in Model)
                 {
-                    Id++;
-                    <tr>
-                        <th>FirstName</th>
-                <th>LastName</th>
+                   
+                <tr>
+                    <td>@users.FirstName</td>
 
-                        <td><a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id">Update</a></td>
+                    <td>@users.LastName</td>
+                    <td>@users.Login</td>
+                    
+                    
+
+                    <td><a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@users.Id">Update</a></td>
 
 
-                        <td>
-                            <button class="btn-link">Delete</button>
+                    <td>
+                        <button class="btn-link">Delete</button>
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 }
             }
         </tbody>

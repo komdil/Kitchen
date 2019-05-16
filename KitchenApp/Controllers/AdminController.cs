@@ -54,6 +54,27 @@ namespace KitchenApp.Controllers
         public IActionResult DeleteOrder() => View();
         public IActionResult CreateOrder() => View();
        
+        [HttpPost]
+        public int CreateNewMenu(string name,string description)
+        {
+          var menus= appContext.Menus.ToList();
+            foreach (var item in menus)
+            {
+                if (item.Name==name)
+                {
+
+                }
+
+            }
+            Menu menu = new Menu() {
+
+
+
+                Name =name,Description=description };
+            appContext.Add(menu);
+       return     appContext.SaveChanges();
+         }
+
         
     }
 }
