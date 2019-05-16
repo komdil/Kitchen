@@ -30,7 +30,7 @@ namespace KitchenApp.Controllers
 
         [HttpGet]
         public IActionResult Login()
-       {
+        {
             if (IsUserAuhorized)
                 return RedirectToHomePage();
             else
@@ -52,8 +52,8 @@ namespace KitchenApp.Controllers
                 return RedirectToHomePage();
             if (ModelState.IsValid)
             {
-                
-                var user = appContext.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == u.HashPassword(model.Password));
+
+                var user = appContext.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == Helper.HashPassword(model.Password, u.Salt));
                 if (user != null)
                 {
                     await Authenticate(user);
@@ -61,11 +61,11 @@ namespace KitchenApp.Controllers
                 }
                 else
                 {
-                    model.Login= "Incorrect login or password";
+                    model.Login = "Incorrect login or password";
                     return View("Login", model);
                 }
-                
-                
+
+
             }
             return View(model);
         }

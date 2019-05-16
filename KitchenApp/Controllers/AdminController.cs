@@ -61,8 +61,8 @@ namespace KitchenApp.Controllers
         public IActionResult AddUser(User userData)
         {
             //is not empty
-            userData.Password = userData.HashPassword(userData.Password);
-            userData.SaltGenerate();
+            userData.Salt = Helper.SaltGenerate();
+            userData.Password = Helper.HashPassword(userData.Password, userData.Salt);
             appContext.Users.Add(userData);
             return View(userData);
         }
