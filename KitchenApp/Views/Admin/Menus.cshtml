@@ -1,7 +1,7 @@
-﻿
-@{
+﻿@model SignalRPushNotification.Server.Models.PushNotificationModel
+@*@{
     ViewData["Title"] = "Menus";
-}
+}*@
 
 <!<!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,6 @@
     <link href="~/css/sb-admin.css" rel="stylesheet">
 
 </head>
-
 <body id="page-top">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -46,15 +45,39 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
-                    <p> @Html.ActionLink("Logout", "Logout", "Account", "http", null, null, null, null)   </p>
-                 
+                    @*<p> @Html.ActionLink("Logout", "Logout", "Account", "http", null, null, null, null)   </p>*@
+
                 </a>
             </li>
             <li class="nav-item">
 
-           </li>
+            </li>
         </ul>
         <div class="container">
+            <form method="post" asp-action="SelectMenuForToday" asp-controller="Admin">
+                <div class="form-group">
+                    <label asp-for="SelectedMenu">Todays Menu</label>
+                    <select name="SelectedMenu" class="form-control" id="todaysMenu">
+                        <option>Plov</option>
+                        <option>Shurbo</option>
+                        <option>Nothing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Message">Message for users</label>
+                    <textarea class="form-control" name="Message" id="messageTextarea" rows="3"></textarea>
+                </div>
+                
+                <label label-for="CallerConnectionId">My Connection Id: </label>
+                <input id="CallerConnectionId" name="CallerConnectionId" value="" class="form-control" readonly />
+                <hr />
+
+                <label label-for="ReciversConnectionIds">Recivers ConnectionId: </label>
+                <input id="ReciversConnectionIds" name="ReciversConnectionIds" class="form-control" placeholder="CONNECTION_ID_1,CONNECTION_ID_2,..." />
+                <div class="form-group">
+                    <input type="submit" id="accept" value="Accept" class="btn btn-primary btn-block btn-lg" />
+                </div>
+            </form>
 
             <div class="row">
                 <div class="col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-sm-offset-2">
@@ -83,12 +106,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
     <footer class="sticky-footer">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
@@ -96,16 +113,9 @@
             </div>
         </div>
     </footer>
-
-
     <!-- /.content-wrapper -->
     <!-- Bootstrap core JavaScript-->
-    <script src="~/jquery/jquery.js"></script>
-    <script src="~/js/bootstrap.bundle.min.js"></script>
-
-
-
-
+    @*<script src="~/jquery/jquery.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>*@
 </body>
-
 </html>

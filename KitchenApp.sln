@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KitchenApp", "KitchenApp\KitchenApp.csproj", "{DC30C762-A733-4C0F-A5E5-EAB712E1088D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenAppUnitTest", "KitchenAppUnitTest\KitchenAppUnitTest.csproj", "{AB039D4D-51BC-4C92-80F3-317C34A78D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KitchenAppUnitTest", "KitchenAppUnitTest\KitchenAppUnitTest.csproj", "{AB039D4D-51BC-4C92-80F3-317C34A78D8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRPushNotification.Server", "SignalRPushNotification.Server\SignalRPushNotification.Server.csproj", "{964C7111-5D5F-4A69-80D2-D31726FFA98F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AB039D4D-51BC-4C92-80F3-317C34A78D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB039D4D-51BC-4C92-80F3-317C34A78D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB039D4D-51BC-4C92-80F3-317C34A78D8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964C7111-5D5F-4A69-80D2-D31726FFA98F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964C7111-5D5F-4A69-80D2-D31726FFA98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964C7111-5D5F-4A69-80D2-D31726FFA98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964C7111-5D5F-4A69-80D2-D31726FFA98F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

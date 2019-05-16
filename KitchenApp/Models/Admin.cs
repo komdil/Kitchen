@@ -17,6 +17,10 @@ namespace KitchenApp.Models
         {
 
         }
+        public void AddNotificationToAllUsers(Notification notification)
+        {
+
+        }
         public Menu GetTodaysMenu()
         {
             var idMenu = Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;

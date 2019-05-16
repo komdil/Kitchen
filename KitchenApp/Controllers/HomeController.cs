@@ -19,6 +19,7 @@ namespace KitchenApp.Controllers
                 return RedirectToAction("Index", "User");
             }
         }
+        //public IActionResult Index() => View();
 
         public IActionResult Error()
         {
