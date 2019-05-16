@@ -41,7 +41,6 @@ namespace KitchenApp.Controllers
         
           public IActionResult Orders() => View();
         public IActionResult Payments() => View();
-        public IActionResult Menus() => View(new PushNotificationModel());
         public IActionResult Menus()
         {
             var menus = appContext.Menus;
