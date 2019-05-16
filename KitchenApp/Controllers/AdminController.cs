@@ -3,6 +3,9 @@ using KitchenApp.Models;
 using KitchenApp.ViewsModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using SignalRPushNotification.Server;
 using SignalRPushNotification.Server.Models;
 using System.Threading.Tasks;
@@ -12,6 +15,8 @@ namespace KitchenApp.Controllers
     [Authorize(Roles = Helper.ADMIN_ROLE)]
     public class AdminController : Controller
     {
+        public KitchenAppContext appContext;
+        public AdminController(KitchenAppContext appContext)
         private readonly IPushNotificationService _pushNotificationService;
         KitchenAppContext appContext;
         public AdminController(KitchenAppContext appContext, IPushNotificationService pushNotificationService)
@@ -20,7 +25,14 @@ namespace KitchenApp.Controllers
             _pushNotificationService = pushNotificationService;
         }
 
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+
+            var menus = appContext.Menus;
+
+            return View(menus);
+        }
+
         public IActionResult Users() => View();
         public IActionResult Orders() => View();
         public IActionResult Payments() => View();
@@ -50,7 +62,7 @@ namespace KitchenApp.Controllers
 
         public IActionResult CreateNewOrder() => View();
         public IActionResult ChahgeOrder() => View();
-        
+
         public IActionResult DeleteOrder() => View();
         public IActionResult CreateOrder() => View();
     }

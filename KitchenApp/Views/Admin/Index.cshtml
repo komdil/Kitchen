@@ -1,0 +1,20 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<KitchenApp.Models.Menu>
+<form class="form">
+
+    <div class="form-group">
+        <       <h1 class="text-center">SelectMenuForToday </h1>
+
+        <select class="form-control" id="exampleFormControlSelect1">
+            @foreach (var item in Model)
+            {
+                <option value="@Html.DisplayFor(modelItem => item.Id)">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </option>
+            }
+        </select>
+    </div>
+</form>

@@ -30,9 +30,13 @@ namespace KitchenApp.Controllers
 
         [HttpGet]
         public IActionResult Login()
-        {
+       {
             if (IsUserAuhorized)
                 return RedirectToHomePage();
+            else
+            {
+                ModelState.AddModelError("", "Incorrect Password");
+            }
             return View();
         }
 
@@ -56,7 +60,7 @@ namespace KitchenApp.Controllers
                 }
                 else
                 {
-                    model.LoginError = "Incorrect login or password";
+                    model.Login= "Incorrect login or password";
                     return View("Login", model);
                 }
                 

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/simple-sidebar.css" rel="stylesheet">
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a asp-action="Index" asp-controller="Admin" class="navbar-brand">Navbar</a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a asp-action="Users" asp-controller="Admin" class="nav-link">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Orders" asp-controller="Admin" class="nav-link">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Menus" asp-controller="Admin" class="nav-link">Menu</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+        
+        <div class="Content">
+            @RenderBody()
+        </div>
+
+
+
+        <script src="~/jquery/jquery.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+
+       
+</body>
+</html>

@@ -82,5 +82,14 @@ namespace KitchenApp.Models
                 throw new MenuWasNotSelectedForTodayException();
             }
         }
+
+        public List<User> GetListOfMenu()
+        {
+            List<User> menus = Context.Users.ToList();
+            return menus;
+
+
+        }
+
     }
 }
