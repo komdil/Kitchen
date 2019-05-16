@@ -52,7 +52,8 @@ namespace KitchenApp.Controllers
                 return RedirectToHomePage();
             if (ModelState.IsValid)
             {
-                var user = appContext.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == model.Password);
+                
+                var user = appContext.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == u.HashPassword(model.Password));
                 if (user != null)
                 {
                     await Authenticate(user);

@@ -1,0 +1,36 @@
+body {
+    background: #222D32;
+}
+span{
+  font-size:15px;
+}
+a{
+text-decoration:none; 
+
+}
+.box{
+  padding:40px 0px;
+}
+
+.box-part{
+  background-color: white;
+  border-radius:0;
+  padding:40px 5px;
+  margin:20px 0px;
+}
+.text{
+  margin:20px 0px;
+}
+
+.fa{
+   color:#4183D7;
+}
+h1 {
+    margin-top: 20px;
+    color: white;
+}
+p {
+    color: #222D32;
+    font-size: 20px;
+    font-weight: bold;
+}

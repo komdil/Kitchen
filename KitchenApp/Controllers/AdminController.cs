@@ -10,13 +10,12 @@ using SignalRPushNotification.Server;
 using SignalRPushNotification.Server.Models;
 using System.Threading.Tasks;
 
+
 namespace KitchenApp.Controllers
 {
     [Authorize(Roles = Helper.ADMIN_ROLE)]
     public class AdminController : Controller
     {
-        public KitchenAppContext appContext;
-        public AdminController(KitchenAppContext appContext)
         private readonly IPushNotificationService _pushNotificationService;
         KitchenAppContext appContext;
         public AdminController(KitchenAppContext appContext, IPushNotificationService pushNotificationService)
@@ -57,6 +56,16 @@ namespace KitchenApp.Controllers
             await _pushNotificationService.SendAsync(notification);
         }
         public IActionResult AddUser() => View();
+
+        [HttpPost]
+        public IActionResult AddUser(User userData)
+        {
+            //is not empty
+            userData.Password = userData.HashPassword(userData.Password);
+            userData.SaltGenerate();
+            appContext.Users.Add(userData);
+            return View(userData);
+        }
         public IActionResult DeleteUser() => View();
         public IActionResult ChahgeUser() => View();
 

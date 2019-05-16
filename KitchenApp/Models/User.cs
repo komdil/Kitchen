@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace KitchenApp.Models
 {
@@ -25,8 +28,29 @@ namespace KitchenApp.Models
             else throw new Exception("Order is not created");
         }
 
+        public string HashPassword(string password)
+        {
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: Convert.FromBase64String(Salt),
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+           return hashed;
+        }
+        public void SaltGenerate()
+        {
+            byte[] salt = new byte[128 / 8];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+            Salt = Convert.ToBase64String(salt);
+        }
+
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Salt { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public virtual bool IsAdmin { get { return this is Admin; } }
