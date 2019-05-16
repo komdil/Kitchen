@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using KitchenApp.Models;
 using SignalRPushNotification.Server;
 
 namespace KitchenApp

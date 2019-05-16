@@ -13,18 +13,13 @@ namespace KitchenApp.Models
         {
 
         }
-        public Admin():base()
+        public Admin() : base()
         {
 
         }
         public void AddNotificationToAllUsers(Notification notification)
         {
 
-        }
-        public Menu GetTodaysMenu()
-        {
-            var idMenu = Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
-            return Context.Menus.FirstOrDefault(d => d.Id == idMenu);
         }
         public void AddNewUser(User user)
         {
@@ -37,26 +32,26 @@ namespace KitchenApp.Models
         }
         public void SelectMenuForToday(Menu menu)
         {
-            if (Context.Orders.Any(o => o.Date == DateTime.Today))
+            try
             {
-                throw new MenuAlreadySelectedException();
+                Context.GetSelectedMenuForToday();
             }
-            else
+            catch (MenuWasNotSelectedForTodayException)
             {
-                Order order = new Order(Context) { Date = DateTime.Today };
-                order.Menu = menu;
+                Order order = new Order(Context) { Date = DateTime.Today, Menu = menu };
                 Context.Orders.Add(order);
                 Context.SaveChanges();
+                return;
             }
+            throw new MenuAlreadySelectedException();
         }
         public override string Role { get { return Helper.ADMIN_ROLE; } }
 
         public void SetPrice(decimal price)
         {
-            if (Details.FirstOrDefault().Order != null)
-            {
-                Details.FirstOrDefault().Order.Price = price;
-            }
+            var todaysMenu = Context.GetSelectedMenuForToday();
+            todaysMenu.Orders.First().Price = price;
+            Context.SaveChanges();
         }
 
         public void AddPayment(User user, decimal amount)
@@ -70,26 +65,10 @@ namespace KitchenApp.Models
 
         public void CloseOrderOfToday()
         {
-            var menu = GetTodaysMenu();
-            if (menu != null)
-            {
-                var order = menu.Orders.Single(a => a.Date == DateTime.Today);
-                order.IsClosed = (!order.IsClosed) ? true : throw new OrderAlreadyClosedException();
-                Context.SaveChanges();
-            }
-            else
-            {
-                throw new MenuWasNotSelectedForTodayException();
-            }
+            var menu = Context.GetSelectedMenuForToday();
+            var order = menu.Orders.Single(a => a.Date == DateTime.Today);
+            order.IsClosed = (!order.IsClosed) ? true : throw new OrderAlreadyClosedException();
+            Context.SaveChanges();
         }
-
-        public List<User> GetListOfMenu()
-        {
-            List<User> menus = Context.Users.ToList();
-            return menus;
-
-
-        }
-
     }
 }

@@ -15,7 +15,9 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void AcceptMenu()
         {
+            Admin admin = new Admin(Context);
             Menu menu = new Menu(Context);
+            admin.SelectMenuForToday(menu);
             TestEntity.AcceptMenu(menu);
             Assert.AreNotEqual(0, menu.Orders.Count, "We can't choose menu if admin doesn't create order");
             Assert.AreNotEqual(0, menu.Orders.First().Details.Count, "If some user choosed menu, than Order.OrderDetail can't be 0");
@@ -25,10 +27,12 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void RejectMenu()
         {
+            Admin admin = new Admin(Context);
             Menu menu = new Menu(Context);
+            admin.SelectMenuForToday(menu);
             TestEntity.AcceptMenu(menu);
             TestEntity.RejectMenu(menu);
-            Assert.IsFalse(menu.Orders.First().Details.Any(x => x.User == TestEntity), "If user accepted menu, than OrderDetail should contain info about this");
+            Assert.IsFalse(menu.Orders.First().Details.Any(x => x.User == TestEntity), "If user accepted menu, than rejected OrderDetail should be removed");
         }
     }
 }

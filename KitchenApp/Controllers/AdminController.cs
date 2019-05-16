@@ -1,11 +1,6 @@
 ﻿using KitchenApp.Models;
-using KitchenApp.Models;
-using KitchenApp.ViewsModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using SignalRPushNotification.Server;
 using SignalRPushNotification.Server.Models;
 using System.Threading.Tasks;

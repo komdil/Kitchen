@@ -1,5 +1,4 @@
 ﻿using KitchenApp.Models;
-using KitchenApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -25,6 +24,7 @@ namespace KitchenAppUnitTest
         public KitchenAppContext GetContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<KitchenAppContext>().UseInMemoryDatabase(Helper.DATABASE);
+            //  var optionsBuilder = new DbContextOptionsBuilder<KitchenAppContext>().UseSqlServer(Helper.CONNECTION_STRING);
             return new KitchenAppContext(optionsBuilder.Options);
         }
 

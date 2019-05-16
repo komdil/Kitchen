@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using KitchenApp.Models;
-using KitchenApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

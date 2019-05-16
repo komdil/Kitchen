@@ -1,5 +1,4 @@
 using KitchenApp.Models;
-using KitchenApp.Models;
 using KitchenApp.Models.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -31,8 +30,11 @@ namespace KitchenAppUnitTest
 
         void SelectMenuIfNotSelected(Admin admin)
         {
-            var seletedMenu = admin.GetTodaysMenu();
-            if (seletedMenu == null)
+            try
+            {
+                var seletedMenu = Context.GetSelectedMenuForToday();
+            }
+            catch (MenuWasNotSelectedForTodayException)
             {
                 Menu menu = new Menu(Context) { Name = "plov" };
                 admin.SelectMenuForToday(menu);
@@ -56,12 +58,14 @@ namespace KitchenAppUnitTest
         [TestMethod]
         public void SetPrice()
         {
+            Admin admin = new Admin(Context);
+            SelectMenuIfNotSelected(admin);
             decimal price = 105.20M;
             TestEntity.SetPrice(price);
-
+            var order = Context.GetSelectedMenuForToday().Orders.First();
+            Assert.AreEqual(price, order.Price, "Price should be equal to setted value!");
             Assert.IsNotNull(TestEntity.Details.FirstOrDefault(), "We should have OrderDetails to get Order!");
             Assert.IsNotNull(TestEntity.Details.FirstOrDefault().Order, "We should have created order to which we can set price!");
-            Assert.AreEqual(price, TestEntity.Details.FirstOrDefault().Order.Price, "Price should be equal to setted value!");
         }
 
         [TestMethod]

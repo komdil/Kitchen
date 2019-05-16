@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using KitchenApp.Models.Exceptions;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace KitchenApp.Models
 {
@@ -10,6 +13,8 @@ namespace KitchenApp.Models
             Database.EnsureCreated();
             BlankData.CreateBlankData(this);
         }
+
+        #region Mapping
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             OrderMapping(modelBuilder);
@@ -60,7 +65,8 @@ namespace KitchenApp.Models
         {
             var etBuilder = builder.Entity<OrderDetail>();
             etBuilder.HasKey(m => new { m.Id });
-            etBuilder.HasOne(o => o.User);
+            etBuilder.HasOne(o => o.User).WithMany(u => u.Details).HasForeignKey(f => f.UserId);
+            etBuilder.HasOne(o => o.Order).WithMany(u => u.Details).HasForeignKey(f => f.OrderId);
             etBuilder.HasMany(o => o.Payments).WithOne(d => d.OrderDetail).HasForeignKey(f => f.OrderDetailId);
         }
         void PaymentDetailMapping(ModelBuilder builder)
@@ -78,6 +84,22 @@ namespace KitchenApp.Models
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentDetail> PaymentDetails { get; set; }
+        #endregion
+
+
+        public Menu GetSelectedMenuForToday()
+        {
+            var idMenu = Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
+            var menu = Menus.FirstOrDefault(d => d.Id == idMenu);
+            if (menu != null)
+            {
+                return menu;
+            }
+            else
+            {
+                throw new MenuWasNotSelectedForTodayException();
+            }
+        }
     }
 }
 
