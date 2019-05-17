@@ -75,20 +75,22 @@ namespace KitchenApp.Models
             etBuilder.HasOne(p => p.Payment).WithMany(m => m.Details);
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Menu> Menus { get; set; }
-        public DbSet<Admin> Admins { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<PaymentDetail> PaymentDetails { get; set; }
         #endregion
 
+        public IQueryable<T> GetEntities<T>() where T : Entity
+        {
+            return Set<T>();
+        }
+
+        public void AddEntity<T>(T entity) where T : Entity
+        {
+            Set<T>().Add(entity);
+        }
 
         public Menu GetSelectedMenuForToday()
         {
-            var idMenu = Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
-            var menu = Menus.FirstOrDefault(d => d.Id == idMenu);
+            var idMenu = GetEntities<Order>().FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
+            var menu = GetEntities<Menu>().FirstOrDefault(d => d.Id == idMenu);
             if (menu != null)
             {
                 return menu;

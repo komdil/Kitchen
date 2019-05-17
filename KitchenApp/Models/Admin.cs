@@ -39,7 +39,7 @@ namespace KitchenApp.Models
             catch (MenuWasNotSelectedForTodayException)
             {
                 Order order = new Order(Context) { Date = DateTime.Today, Menu = menu };
-                Context.Orders.Add(order);
+                Context.AddEntity(order);
                 Context.SaveChanges();
                 return;
             }

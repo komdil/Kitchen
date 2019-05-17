@@ -52,7 +52,7 @@ namespace KitchenApp.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = appContext.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == Helper.HashPassword(model.Password, u.Salt));
+                var user = appContext.GetEntities<User>().FirstOrDefault(u => u.Login == model.Login && u.Password == Helper.HashPassword(model.Password, u.Salt));
                 if (user != null)
                 {
                     await Authenticate(user);
