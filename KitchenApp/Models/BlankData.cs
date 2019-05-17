@@ -7,7 +7,7 @@ namespace KitchenApp.Models
     {
         static void AddDefaultAdminIfDoesNotExists(KitchenAppContext Context)
         {
-            if (!Context.Admins.Any())
+            if (!Context.GetEntities<Admin>().Any())
             {
                 Admin defaultAdmin = new Admin(Context)
                 {
@@ -20,7 +20,7 @@ namespace KitchenApp.Models
                 var passwordHash = Helper.HashPassword("Administrator", salt);
                 defaultAdmin.Salt = salt;
                 defaultAdmin.Password = passwordHash;
-                Context.Admins.Add(defaultAdmin);
+                Context.AddEntity(defaultAdmin);
             }
         }
 

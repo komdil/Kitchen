@@ -21,25 +21,21 @@ namespace KitchenApp.Controllers
 
         public IActionResult Index()
         {
-
-            var menus = appContext.Menus;
-
+            var menus = appContext.GetEntities<Menu>();
             return View(menus);
         }
 
         public IActionResult Users()
         {
-            var users = appContext.Users;
-
+            var users = appContext.GetEntities<User>();
             return View(users);
         }
-        
-          public IActionResult Orders() => View();
+
+        public IActionResult Orders() => View();
         public IActionResult Payments() => View();
         public IActionResult Menus()
         {
-            var menus = appContext.Menus;
-
+            var menus = appContext.GetEntities<Menu>();
             return View(menus);
         }
         public IActionResult CreateNewMenu() => View();
@@ -69,7 +65,7 @@ namespace KitchenApp.Controllers
             //is not empty
             userData.Salt = Helper.SaltGenerate();
             userData.Password = Helper.HashPassword(userData.Password, userData.Salt);
-            appContext.Users.Add(userData);
+            appContext.AddEntity(userData);
             return View(userData);
         }
         public IActionResult DeleteUser() => View();
@@ -80,7 +76,7 @@ namespace KitchenApp.Controllers
 
         public IActionResult DeleteOrder() => View();
         public IActionResult CreateOrder() => View();
-       
-        
+
+
     }
 }

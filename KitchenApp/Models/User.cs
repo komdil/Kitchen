@@ -20,7 +20,7 @@ namespace KitchenApp.Models
             if (menu.Orders.Count != 0)//order created
             {
                 OrderDetail orderDetail = new OrderDetail(Context) { User = this, Order = menu.Orders.First() };
-                Context.OrderDetails.Add(orderDetail);
+                Context.AddEntity(orderDetail);
                 Context.SaveChanges();
             }
             else throw new MenuWasNotSelectedForTodayException();
@@ -28,10 +28,10 @@ namespace KitchenApp.Models
 
         public void RejectMenu(Menu menu)
         {
-            OrderDetail orderDetail = Context.OrderDetails.FirstOrDefault(a => a.User == this && a.Order == menu.Orders.First());
+            OrderDetail orderDetail = Context.GetEntities<OrderDetail>().FirstOrDefault(a => a.User == this && a.Order == menu.Orders.First());
             if (orderDetail != null)
             {
-                Context.OrderDetails.Remove(orderDetail);
+                Context.Remove(orderDetail);
                 Context.SaveChanges();
             }
         }

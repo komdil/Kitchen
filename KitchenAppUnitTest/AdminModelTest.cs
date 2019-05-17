@@ -48,7 +48,7 @@ namespace KitchenAppUnitTest
             SelectMenuIfNotSelected(TestEntity);
 
             TestEntity.CloseOrderOfToday();
-            Order order = Context.Orders.FirstOrDefault(o => o.Date == DateTime.Today);
+            Order order = Context.GetEntities<Order>().FirstOrDefault(o => o.Date == DateTime.Today);
             Assert.IsNotNull(order, "We cant close order, which was not created");
             Assert.IsTrue(order.IsClosed, "Order should be closed!");
 
