@@ -60,12 +60,27 @@ namespace KitchenAppUnitTest
         {
             Admin admin = new Admin(Context);
             SelectMenuIfNotSelected(admin);
+            var menu = Context.GetSelectedMenuForToday();
+
+            //Users accepts menu
+            User firstUser = new User(Context);
+            User secondUser = new User(Context);
+            firstUser.AcceptMenu(menu);
+            secondUser.AcceptMenu(menu);
+
+            //Admin sets price
             decimal price = 105.20M;
             TestEntity.SetPrice(price);
+
+            //Price should be setted
             var order = Context.GetSelectedMenuForToday().Orders.First();
             Assert.AreEqual(price, order.Price, "Price should be equal to setted value!");
-            Assert.IsNotNull(TestEntity.Details.FirstOrDefault(), "We should have OrderDetails to get Order!");
-            Assert.IsNotNull(TestEntity.Details.FirstOrDefault().Order, "We should have created order to which we can set price!");
+
+            //Price for each people
+            Assert.AreEqual(price / 2, order.PriceForEach, "Price for each people should be price/2 because 2 users accepted menu");
+
+            firstUser.RejectMenu(menu);
+            Assert.AreEqual(price, order.PriceForEach, "Price for each should be equal to price because one user rejected menu");
         }
 
         [TestMethod]
@@ -75,7 +90,7 @@ namespace KitchenAppUnitTest
             decimal amount = 10.50M;
             TestEntity.AddPayment(user, amount);
 
-            Assert.IsTrue(TestEntity.Payments.Any(x => x.User == user && x.Amount == amount), "If user payed, this info should saved in list of payments!");
+            Assert.IsTrue(TestEntity.Payments.Any(x => x.User == user && x.SummAmount == amount), "If user payed, this info should saved in list of payments!");
         }
     }
 }

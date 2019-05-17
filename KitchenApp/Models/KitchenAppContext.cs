@@ -67,13 +67,11 @@ namespace KitchenApp.Models
             etBuilder.HasKey(m => new { m.Id });
             etBuilder.HasOne(o => o.User).WithMany(u => u.Details).HasForeignKey(f => f.UserId);
             etBuilder.HasOne(o => o.Order).WithMany(u => u.Details).HasForeignKey(f => f.OrderId);
-            etBuilder.HasMany(o => o.Payments).WithOne(d => d.OrderDetail).HasForeignKey(f => f.OrderDetailId);
         }
         void PaymentDetailMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<PaymentDetail>();
             etBuilder.HasKey(m => new { m.Id });
-            etBuilder.HasOne(p => p.OrderDetail).WithMany(m => m.Payments).HasForeignKey(f => f.OrderDetailId);
             etBuilder.HasOne(p => p.Payment).WithMany(m => m.Details);
         }
 

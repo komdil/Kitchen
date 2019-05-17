@@ -1,8 +1,6 @@
-﻿using KitchenApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace KitchenApp.Models
 {
@@ -12,15 +10,38 @@ namespace KitchenApp.Models
         {
 
         }
-
         public Payment() : base()
         {
 
         }
-        public DateTime DateTime { get; set; }
-        public decimal Amount { get; set; }
+        public decimal SummAmount { get; set; }
         public virtual List<PaymentDetail> Details { get; set; } = new List<PaymentDetail>();
         public virtual User User { get; set; }
         public Guid UserId { get; set; }
+        public virtual PaymentStatus Status
+        {
+            get
+            {
+                var summOfPayments = Details.Select(a => a.PaidAmount).Sum();
+                if (summOfPayments >= SummAmount)
+                {
+                    return PaymentStatus.Paid;
+                }
+                else if (summOfPayments < SummAmount)
+                {
+                    return PaymentStatus.IsNotPaidAll;
+                }
+                else
+                {
+                    return PaymentStatus.IsNotPaid;
+                }
+            }
+        }
+    }
+    public enum PaymentStatus
+    {
+        IsNotPaid,
+        IsNotPaidAll,
+        Paid,
     }
 }

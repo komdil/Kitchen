@@ -56,11 +56,7 @@ namespace KitchenApp.Models
 
         public void AddPayment(User user, decimal amount)
         {
-            Payment payment = new Payment(Context) { User = user, Amount = amount, DateTime = DateTime.Now };
-            PaymentDetail paymentDetail = new PaymentDetail(Context) { Payment = payment, OrderDetail = this.Details.FirstOrDefault() };
-            payment.Details.Add(paymentDetail);
-
-            Payments.Add(payment);
+          
         }
 
         public void CloseOrderOfToday()
