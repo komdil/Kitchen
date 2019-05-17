@@ -40,12 +40,6 @@ namespace KitchenAppUnitTest
         }
 
         [TestMethod]
-        public void MyTestMethod()
-        {
-            var result = Context.Orders.FirstOrDefault();
-        }
-
-        [TestMethod]
         public void RejectMenu()
         {
             Admin admin = new Admin(Context);
