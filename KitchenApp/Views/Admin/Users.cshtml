@@ -6,7 +6,7 @@
 @model IEnumerable<KitchenApp.Models.User>
 
 <form method="post" class="form">
-    <h3><a asp-action="CreateNewMenu" asp-controller="Admin" class="btn btn-sm btn-info">Create</a></h3>
+    <h3><a asp-action="CreateNewUser" asp-controller="Admin" class="btn btn-sm btn-info"> <i class="glyphicon glyphicon-plus"></i>Create New User</a></h3>
     <table class="table table-bordered table-sm table-striped">
         <thead>
             <tr>
@@ -15,8 +15,8 @@
                 <th>LastName</th>
                 <th>Login</th>
             
-                <th></th>
-                <th></th>
+                <th>Action</th>
+
             </tr>
         </thead>
         <tbody>
@@ -40,13 +40,17 @@
                     
                     
 
-                    <td><a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@users.Id">Update</a></td>
-
-
                     <td>
-                        <button class="btn-link">Delete</button>
-
+                        <a asp-action="UpdateUser" asp-controller="Admin" asp-route-id="@users.Id">
+                            <i class="glyphicon glyphicon-pencil" title="Edit"></i>
+                        </a>
+                        <a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@users.Id">
+                            <i class="glyphicon glyphicon-trash" title="Delete"></i>
+                        </a>
                     </td>
+
+
+                   
                 </tr>
                 }
             }

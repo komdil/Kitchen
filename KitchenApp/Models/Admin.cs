@@ -9,6 +9,10 @@ namespace KitchenApp.Models
 {
     public class Admin : User
     {
+        public void GetAdmin()
+        {
+           
+        }
         public Admin(KitchenAppContext context) : base(context)
         {
 
@@ -85,6 +89,17 @@ namespace KitchenApp.Models
             return menus;
 
 
+        }
+
+        public int CreateNewMenu(string name,string description)
+        {
+            return 0;
+        }
+
+
+        public bool ifMenuIsExsist(string name)
+        {
+            return Context.Menus.Any(m => m.Name == name);
         }
 
     }

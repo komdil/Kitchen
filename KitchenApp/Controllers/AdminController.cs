@@ -1,7 +1,9 @@
 ﻿using KitchenApp.DateProvider;
 using KitchenApp.Models;
+using KitchenApp.ViewsModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +44,28 @@ namespace KitchenApp.Controllers
             return View(menus);
         }
         public IActionResult CreateNewMenu() => View();
-        public IActionResult UpdateMenu() => View();
+        public IActionResult UpdateMenu(Guid Id)
+        {
+            var menu = appContext.Menus.FirstOrDefault(m => m.Id == Id);
+            return View(menu);
+            
+        }
+        public IActionResult CreateNewUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateNewUser(UserModel userModel)
+        {
+            return View();
+        }
+        public IActionResult UpdateUser(Guid Id)
+        {
+            var user = appContext.Users.FirstOrDefault(u => u.Id == Id);
+            return View(user);
+
+            
+        }
         public IActionResult SelectMenuForToday() => View();
         public IActionResult AddUser() => View();
         public IActionResult DeleteUser() => View();

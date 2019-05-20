@@ -7,45 +7,44 @@
 @model IEnumerable<KitchenApp.Models.Menu>
 
 <form method="post" class="form">
-    <h3><a asp-action="CreateNewMenu"asp-controller="Admin" class="btn btn-sm btn-info">Create</a></h3>
+    <div style="margin-top:15px; margin-bottom:10px;" class="btn-group">
+    <a  asp-action="CreateNewMenu" asp-controller="Admin"  class="btn btn-info">
+        <i class="glyphicon glyphicon-plus"></i>  Create New Menu
+    </a>
+</div>
     <table class="table table-bordered table-sm table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th></th>
-                <th></th>
+                <th>Action</th>
+                
             </tr>
         </thead>
         <tbody>
-            @if (Model == null)
-            {
-                <tr>
-                    <td colspan="7" class="text-center">No Model Data</td>
-                </tr>
-            }
-            else
-            {
-                int Id=0;
+           
+                
                 @foreach (var menu in Model)
                 {
-                    Id++;
-                    <tr>
-                        <td>@Id</td>
-                        <td>@menu.Name</td>
-                        <td>@menu.Description</td>
-                        
-                        <td><a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id">Update</a></td>
-                        
-                        
-                        <td>
-                             <button class="btn-link">Delete</button>
+                   
+            <tr>
 
-                        </td>
-                    </tr>
+                <td>@menu.Name</td>
+                <td>@menu.Description</td>
+
+                <td>
+                    <a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id">
+                        <i class="glyphicon glyphicon-pencil" title="Edit"></i>
+                    </a>
+                    <a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id">
+                        <i class="glyphicon glyphicon-trash" title="Delete"></i>
+                    </a>
+
+                </td>
+
+                </tr>
                 }
-            }
+            
         </tbody>
     </table>
 </form>
