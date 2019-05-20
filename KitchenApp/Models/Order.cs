@@ -11,6 +11,11 @@ namespace KitchenApp.Models
         {
 
         }
+
+        protected Order() : base()
+        {
+
+        }
         public DateTime Date { get; set; }
         public Guid MenuId { get; set; }
         public virtual Menu Menu { get; set; }

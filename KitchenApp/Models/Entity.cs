@@ -33,7 +33,7 @@ namespace KitchenApp.Models
             Context = context;
         }
 
-        public Entity()
+        protected Entity()
         {
 
         }

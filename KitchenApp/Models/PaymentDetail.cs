@@ -10,7 +10,7 @@ namespace KitchenApp.Models
 
         }
 
-        public PaymentDetail() : base()
+        protected PaymentDetail() : base()
         {
 
         }

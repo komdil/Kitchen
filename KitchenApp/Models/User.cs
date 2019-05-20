@@ -11,7 +11,7 @@ namespace KitchenApp.Models
         {
 
         }
-        public User() : base()
+        protected User() : base()
         {
 
         }

@@ -12,7 +12,7 @@ namespace KitchenApp.Models
 
         }
 
-        public OrderDetail() : base()
+        protected OrderDetail() : base()
         {
 
         }

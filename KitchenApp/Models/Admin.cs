@@ -13,7 +13,7 @@ namespace KitchenApp.Models
         {
 
         }
-        public Admin() : base()
+        protected Admin() : base()
         {
 
         }
@@ -56,7 +56,7 @@ namespace KitchenApp.Models
 
         public void AddPayment(User user, decimal amount)
         {
-          
+
         }
 
         public void CloseOrderOfToday()

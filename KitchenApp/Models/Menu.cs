@@ -12,7 +12,7 @@ namespace KitchenApp.Models
         {
 
         }
-        public Menu() : base()
+        protected Menu() : base()
         {
             
         }
