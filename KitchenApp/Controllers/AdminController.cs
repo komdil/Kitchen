@@ -110,9 +110,18 @@ namespace KitchenApp.Controllers
         public IActionResult CreateOrder() => View();
 
         [HttpPost]
-        public IActionResult CreateNewMenu(string name, string description)
+        public IActionResult CreateNewMenu(MenuModel menuModel)
         {
-            return View("Menus");
+            int result = Admin.CreateNewMenu(menuModel.Name, menuModel.Description);
+            if (result>0)
+            {
+                return RedirectToAction("Menus", "Admin");
+            }
+            else
+            {
+                menuModel.Errormessage = "Menu is AlreadyExsist";
+                return View(menuModel);
+            }
         }
     }
 }
