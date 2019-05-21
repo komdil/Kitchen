@@ -79,12 +79,8 @@ namespace KitchenApp.Models
 
         public IQueryable<T> GetEntities<T>() where T : Entity
         {
-            return Set<T>();
-        }
-
-        public void AddEntity<T>(T entity) where T : Entity
-        {
-            Set<T>().Add(entity);
+            IQueryable<T> query = Set<T>();
+            return new IContextable<T>(query, this);
         }
 
         public Menu GetSelectedMenuForToday()

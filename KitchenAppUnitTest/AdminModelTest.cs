@@ -56,6 +56,7 @@ namespace KitchenAppUnitTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(PriceAlreadySetException), "It should throw exception, RejectMenu calls after setting price")]
         public void SetPrice()
         {
             Admin admin = new Admin(Context);
@@ -79,8 +80,14 @@ namespace KitchenAppUnitTest
             //Price for each people
             Assert.AreEqual(price / 2, order.PriceForEach, "Price for each people should be price/2 because 2 users accepted menu");
 
-            firstUser.RejectMenu(menu);
-            Assert.AreEqual(price, order.PriceForEach, "Price for each should be equal to price because one user rejected menu");
+            firstUser.RejectMenu(menu); // Exception throws here
+        }
+
+
+        [TestMethod]
+        public void SetPrice_PaymentTest()
+        {
+            // TODO
         }
 
         [TestMethod]

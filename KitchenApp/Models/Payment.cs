@@ -43,5 +43,6 @@ namespace KitchenApp.Models
         IsNotPaid,
         IsNotPaidAll,
         Paid,
+        PaidMore
     }
 }

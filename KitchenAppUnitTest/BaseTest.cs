@@ -17,6 +17,13 @@ namespace KitchenAppUnitTest
             Context = GetContext();
             SetTestEntity();
         }
+
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            Context.Database.EnsureDeleted();
+            Context.Database.EnsureCreated();
+        }
         public virtual void SetTestEntity()
         {
 
@@ -24,7 +31,7 @@ namespace KitchenAppUnitTest
         public KitchenAppContext GetContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<KitchenAppContext>().UseInMemoryDatabase(Helper.DATABASE);
-            //  var optionsBuilder = new DbContextOptionsBuilder<KitchenAppContext>().UseSqlServer(Helper.CONNECTION_STRING);
+            //optionsBuilder = new DbContextOptionsBuilder<KitchenAppContext>().UseSqlServer(Helper.CONNECTION_STRING);
             return new KitchenAppContext(optionsBuilder.Options);
         }
 

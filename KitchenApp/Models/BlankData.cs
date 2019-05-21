@@ -20,7 +20,6 @@ namespace KitchenApp.Models
                 var passwordHash = Helper.HashPassword("Administrator", salt);
                 defaultAdmin.Salt = salt;
                 defaultAdmin.Password = passwordHash;
-                Context.AddEntity(defaultAdmin);
             }
         }
 

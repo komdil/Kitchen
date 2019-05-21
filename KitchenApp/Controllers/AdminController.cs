@@ -65,7 +65,7 @@ namespace KitchenApp.Controllers
             //is not empty
             userData.Salt = Helper.SaltGenerate();
             userData.Password = Helper.HashPassword(userData.Password, userData.Salt);
-            appContext.AddEntity(userData);
+            //appContext.AddEntity(userData);
             return View(userData);
         }
         public IActionResult DeleteUser() => View();
