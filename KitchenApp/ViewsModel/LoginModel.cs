@@ -10,6 +10,6 @@ namespace KitchenApp.ViewsModel
         [Required(ErrorMessage = "Password is not assignet")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public static string LoginError { get; set; }
+        public  string LoginError { get; set; }
     }
 }

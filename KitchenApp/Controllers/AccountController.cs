@@ -60,7 +60,7 @@ namespace KitchenApp.Controllers
                 }
                 else
                 {
-                    model.Login= "Incorrect login or password";
+                    model.LoginError="Incorrect Login or Password";
                     return View("Login", model);
                 }
                 

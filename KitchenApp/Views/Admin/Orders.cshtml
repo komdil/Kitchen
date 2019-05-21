@@ -2,5 +2,39 @@
 @{
     ViewData["Title"] = "Order";
 }
+@model IEnumerable<KitchenApp.Models.OrderDetail>
+
+<div class="table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(models => models.User)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(models => models.Order)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
 
 

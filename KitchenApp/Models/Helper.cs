@@ -11,5 +11,6 @@ namespace KitchenApp.Models
         public const string USER_ROLE = "User";
         public const string DATABASE = "KitchenAppDb";
         public const string CONNECTION_STRING = "Server=(localdb)\\MSSQLLocalDB;Database=KitchenAppDb;Trusted_Connection=True;";
+        public static Guid IdMenu;
     }
 }

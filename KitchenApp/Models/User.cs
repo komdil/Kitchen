@@ -1,6 +1,7 @@
 ﻿using KitchenApp.DateProvider;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace KitchenApp.Models
@@ -24,9 +25,11 @@ namespace KitchenApp.Models
             }
             else throw new Exception("Order is not created");
         }
-
+        [Required(ErrorMessage = "Login is not assignet")]
         public string Login { get; set; }
+        [Required(ErrorMessage = "Password is not assignet")]
         public string Password { get; set; }
+        [Required(ErrorMessage = "FirstName is not assignet")]
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public virtual bool IsAdmin { get { return this is Admin; } }

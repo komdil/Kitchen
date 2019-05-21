@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace KitchenApp.Controllers
@@ -15,6 +16,8 @@ namespace KitchenApp.Controllers
     public class AdminController : Controller
     {
         public KitchenAppContext appContext;
+        
+     
         public AdminController(KitchenAppContext appContext)
         {
             this.appContext = appContext;
@@ -22,12 +25,13 @@ namespace KitchenApp.Controllers
 
         public IActionResult Index()
         {
+           
 
             var menus = appContext.Menus;
 
             return View(menus);
         }
-
+        
         public IActionResult Users()
         {
             var users = appContext.Users;
@@ -35,7 +39,12 @@ namespace KitchenApp.Controllers
             return View(users);
         }
         
-          public IActionResult Orders() => View();
+          public IActionResult Orders()
+        {
+            var orders = appContext.Orders;
+
+            return View(orders);
+        }
         public IActionResult Payments() => View();
         public IActionResult Menus()
         {
@@ -47,9 +56,22 @@ namespace KitchenApp.Controllers
         public IActionResult UpdateMenu(Guid Id)
         {
             var menu = appContext.Menus.FirstOrDefault(m => m.Id == Id);
+            Helper.IdMenu = Id;
             return View(menu);
             
         }
+        [HttpPost]
+        public IActionResult UpdateMenu(Menu menuModel)
+        {
+            var menu = appContext.Menus.FirstOrDefault(m => m.Id == Helper.IdMenu);
+            menu.Name = menuModel.Name;
+            menu.Description = menuModel.Description;
+            appContext.Update(menu);
+            appContext.SaveChanges();
+            return RedirectToAction("Menus", "Admin");
+
+        }
+
         public IActionResult CreateNewUser()
         {
             return View();
@@ -78,26 +100,43 @@ namespace KitchenApp.Controllers
         public IActionResult CreateOrder() => View();
        
         [HttpPost]
-        public int CreateNewMenu(string name,string description)
+        public IActionResult CreateNewMenu(string name,string description)
         {
-          var menus= appContext.Menus.ToList();
-            foreach (var item in menus)
+            Menu menu = new Menu()
             {
-                if (item.Name==name)
-                {
-
-                }
-
-            }
-            Menu menu = new Menu() {
-
-
-
-                Name =name,Description=description };
+                Name = name,
+                Description = description
+            };
             appContext.Add(menu);
-       return     appContext.SaveChanges();
-         }
+            appContext.SaveChanges();
 
+            return RedirectToAction("Menus", "Admin");
+       
+
+        }
         
+       public IActionResult DeleteMenu(Guid Id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult DeleteMenu(string id)
+        {
+            var menu = appContext.Menus.FirstOrDefault(m => m.Id.ToString() == id);
+            appContext.Remove(menu);
+            appContext.SaveChanges();
+            return RedirectToAction("Menus", "Admin");  
+                        
+        }
+
+        [HttpPost]
+        public IActionResult DeleteUser(string id)
+        {
+
+
+            return RedirectToAction("Users", "Admin");
+        }
+
+
     }
 }

@@ -9,6 +9,7 @@ namespace KitchenApp.ViewsModel
 {
     public class MenuModel
     {
+       
         [Required(ErrorMessage ="Name is not assignet")]
         public string Name { get; set; }
         public string Description { get; set; }
