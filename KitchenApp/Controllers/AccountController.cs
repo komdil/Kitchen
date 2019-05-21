@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using KitchenApp.Models;
-using KitchenApp.DateProvider;
 using Microsoft.AspNetCore.Mvc;
 using KitchenApp.ViewsModel;
 using System.Security.Claims;
@@ -30,7 +29,7 @@ namespace KitchenApp.Controllers
 
         [HttpGet]
         public IActionResult Login()
-       {
+        {
             if (IsUserAuhorized)
                 return RedirectToHomePage();
             else
@@ -52,7 +51,8 @@ namespace KitchenApp.Controllers
                 return RedirectToHomePage();
             if (ModelState.IsValid)
             {
-                var user = appContext.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == model.Password);
+
+                var user = appContext.GetEntities<User>().FirstOrDefault(u => u.Login == model.Login && u.Password == Helper.HashPassword(model.Password, u.Salt));
                 if (user != null)
                 {
                     await Authenticate(user);
@@ -60,11 +60,11 @@ namespace KitchenApp.Controllers
                 }
                 else
                 {
-                    model.Login= "Incorrect login or password";
+                    model.Login = "Incorrect login or password";
                     return View("Login", model);
                 }
-                
-                
+
+
             }
             return View(model);
         }

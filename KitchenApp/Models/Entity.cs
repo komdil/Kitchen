@@ -1,17 +1,9 @@
-﻿using JetBrains.Annotations;
-using KitchenApp.DateProvider;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System;
 
 namespace KitchenApp.Models
 {
     public abstract class Entity
     {
-
         Guid id;
         public Guid Id
         {
@@ -32,9 +24,10 @@ namespace KitchenApp.Models
         public Entity(KitchenAppContext context)
         {
             Context = context;
+            Context.Add(this);
         }
 
-        public Entity()
+        protected Entity()
         {
 
         }

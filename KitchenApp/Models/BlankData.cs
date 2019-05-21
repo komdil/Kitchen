@@ -1,4 +1,4 @@
-﻿using KitchenApp.DateProvider;
+﻿using KitchenApp.Models;
 using System.Linq;
 
 namespace KitchenApp.Models
@@ -7,16 +7,19 @@ namespace KitchenApp.Models
     {
         static void AddDefaultAdminIfDoesNotExists(KitchenAppContext Context)
         {
-            if (!Context.Admins.Any())
+            if (!Context.GetEntities<Admin>().Any())
             {
                 Admin defaultAdmin = new Admin(Context)
                 {
                     FirstName = "Administrator",
                     LastName = "Administrator",
                     Login = "Administrator",
-                    Password = "Administrator",
+
                 };
-                Context.Admins.Add(defaultAdmin);
+                var salt = Helper.SaltGenerate();
+                var passwordHash = Helper.HashPassword("Administrator", salt);
+                defaultAdmin.Salt = salt;
+                defaultAdmin.Password = passwordHash;
             }
         }
 

@@ -1,6 +1,7 @@
-﻿using KitchenApp.DateProvider;
+﻿using KitchenApp.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KitchenApp.Models
 {
@@ -11,13 +12,12 @@ namespace KitchenApp.Models
 
         }
 
-        public OrderDetail() : base()
+        protected OrderDetail() : base()
         {
 
         }
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
-        public virtual List<PaymentDetail> Payments { get; set; } = new List<PaymentDetail>();
         public virtual Order Order { get; set; }
         public Guid OrderId { get; set; }
     }

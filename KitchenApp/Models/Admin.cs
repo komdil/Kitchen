@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KitchenApp.DateProvider;
+using KitchenApp.Models;
 using KitchenApp.Models.Exceptions;
 
 namespace KitchenApp.Models
@@ -17,14 +17,13 @@ namespace KitchenApp.Models
         {
 
         }
-        public Admin():base()
+        protected Admin() : base()
         {
 
         }
-        public Menu GetTodaysMenu()
+        public void AddNotificationToAllUsers(Notification notification)
         {
-            var idMenu = Context.Orders.FirstOrDefault(d => d.Date == DateTime.Today)?.MenuId;
-            return Context.Menus.FirstOrDefault(d => d.Id == idMenu);
+
         }
         public void AddNewUser(User user)
         {
@@ -37,35 +36,30 @@ namespace KitchenApp.Models
         }
         public void SelectMenuForToday(Menu menu)
         {
-            if (Context.Orders.Any(o => o.Date == DateTime.Today))
+            try
             {
-                throw new MenuAlreadySelectedException();
+                Context.GetSelectedMenuForToday();
             }
-            else
+            catch (MenuWasNotSelectedForTodayException)
             {
-                Order order = new Order(Context) { Date = DateTime.Today };
-                order.Menu = menu;
-                Context.Orders.Add(order);
+                Order order = new Order(Context) { Date = DateTime.Today, Menu = menu };
                 Context.SaveChanges();
+                return;
             }
+            throw new MenuAlreadySelectedException();
         }
         public override string Role { get { return Helper.ADMIN_ROLE; } }
 
         public void SetPrice(decimal price)
         {
-            if (Details.FirstOrDefault().Order != null)
-            {
-                Details.FirstOrDefault().Order.Price = price;
-            }
+            var todaysMenu = Context.GetSelectedMenuForToday();
+            todaysMenu.Orders.First().Price = price;
+            Context.SaveChanges();
         }
 
         public void AddPayment(User user, decimal amount)
         {
-            Payment payment = new Payment(Context) { User = user, Amount = amount, DateTime = DateTime.Now };
-            PaymentDetail paymentDetail = new PaymentDetail(Context) { Payment = payment, OrderDetail = this.Details.FirstOrDefault() };
-            payment.Details.Add(paymentDetail);
 
-            Payments.Add(payment);
         }
 
         public void CloseOrderOfToday()

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using KitchenApp.DateProvider;
+using KitchenApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using KitchenApp.Models;
+using SignalRPushNotification.Server;
 
 namespace KitchenApp
 {
@@ -28,6 +28,10 @@ namespace KitchenApp
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
 
+            services.AddPushNotification(options =>
+            {
+                options.Path = "/pushNotificationHub";
+            });
             services.AddMvc();
 
         }
@@ -47,6 +51,8 @@ namespace KitchenApp
             app.UseStaticFiles();
             app.UseDefaultFiles();
             app.UseAuthentication();
+            app.UsePushNotification();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

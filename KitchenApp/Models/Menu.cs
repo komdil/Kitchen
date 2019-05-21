@@ -1,4 +1,4 @@
-﻿using KitchenApp.DateProvider;
+﻿using KitchenApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace KitchenApp.Models
         {
 
         }
-        public Menu() : base()
+        protected Menu() : base()
         {
             
         }

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using KitchenApp.DateProvider;
 using KitchenApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +25,7 @@ namespace KitchenApp.Controllers
                 return RedirectToAction("Index", "User");
             }
         }
+        //public IActionResult Index() => View();
 
         public IActionResult Error()
         {

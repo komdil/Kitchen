@@ -1,6 +1,7 @@
-﻿using KitchenApp.DateProvider;
+﻿using KitchenApp.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KitchenApp.Models
 {
@@ -10,7 +11,8 @@ namespace KitchenApp.Models
         {
 
         }
-        public Order() : base()
+
+        protected Order() : base()
         {
 
         }
@@ -20,6 +22,9 @@ namespace KitchenApp.Models
         public bool IsClosed { get; set; }
         public decimal Price { get; set; }
         public virtual int PeopleCount { get { return Details.Count; } }
+
+        public virtual decimal PriceForEach { get { return Price / PeopleCount; } }
+
         public virtual List<OrderDetail> Details { get; set; } = new List<OrderDetail>();
     }
 }

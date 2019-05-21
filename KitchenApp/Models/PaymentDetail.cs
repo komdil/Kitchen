@@ -1,4 +1,4 @@
-﻿using KitchenApp.DateProvider;
+﻿using KitchenApp.Models;
 using System;
 
 namespace KitchenApp.Models
@@ -10,12 +10,13 @@ namespace KitchenApp.Models
 
         }
 
-        public PaymentDetail() : base()
+        protected PaymentDetail() : base()
         {
 
         }
         public virtual Payment Payment { get; set; }
-        public Guid OrderDetailId { get; set; }
-        public virtual OrderDetail OrderDetail { get; set; }
+        public Guid PaymentId { get; set; }
+        public DateTime DateTime { get; set; }
+        public decimal PaidAmount { get; set; }
     }
 }
