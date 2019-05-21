@@ -17,6 +17,7 @@ namespace KitchenApp.Controllers
     public class AdminController : Controller
     {
         private readonly IPushNotificationService _pushNotificationService;
+        Admin Admin => appContext.GetEntities<Admin>().Single(a => a.Login == User.Identity.Name);
         KitchenAppContext appContext;
         public AdminController(KitchenAppContext appContext, IPushNotificationService pushNotificationService)
         {
@@ -29,7 +30,7 @@ namespace KitchenApp.Controllers
             var menus = appContext.GetEntities<Menu>();
             return View(menus);
         }
-        
+
         public IActionResult Users()
         {
             var users = appContext.GetEntities<User>();
@@ -49,16 +50,12 @@ namespace KitchenApp.Controllers
             var menu = appContext.GetEntities<Menu>().FirstOrDefault(m => m.Id == Id);
             return View(menu);
         }
-        [HttpPost]
-        public IActionResult UpdateMenu(Menu menuModel)
-        {
-            var menu = appContext.Menus.FirstOrDefault(m => m.Id == Helper.IdMenu);
-            menu.Name = menuModel.Name;
-            menu.Description = menuModel.Description;
-            appContext.Update(menu);
-            appContext.SaveChanges();
-            return RedirectToAction("Menus", "Admin");
 
+        [HttpPost]
+        public IActionResult UpdateMenu(MenuModel menuModel)
+        {
+            Admin.UpdateMenu(menuModel.Id, menuModel.Name, menuModel.Description);
+            return RedirectToAction("Menus", "Admin");
         }
 
         public IActionResult CreateNewUser()
@@ -113,15 +110,9 @@ namespace KitchenApp.Controllers
         public IActionResult CreateOrder() => View();
 
         [HttpPost]
-        public int CreateNewMenu(string name, string description)
+        public IActionResult CreateNewMenu(string name, string description)
         {
-          var menus= appContext.Menus.ToList();
-            foreach (var item in menus)
-            {
-                Name = name,
-                Description = description
-            };
-            return appContext.SaveChanges();
+            return View("Menus");
         }
     }
 }

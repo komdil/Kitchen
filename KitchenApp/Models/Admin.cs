@@ -78,41 +78,25 @@ namespace KitchenApp.Models
             }
         }
 
-        public  int CreateNewMenu(string name,string description)
+        public int CreateNewMenu(string name, string description)
         {
-            if (menuIsExsist(name)==true)
-            {
-                return Context.SaveChanges();
-            }
-            else
-            {
-                Menu menu = new Menu() {Name=name,Description=description };
-                Context.Add(menu);
-                return Context.SaveChanges();
-
-
-            }
+            Menu menu = new Menu(Context) { Name = name, Description = description };
+            return Context.SaveChanges();
         }
 
-        public int UpdateMenu(string name,string description)
+        public int UpdateMenu(Guid id, string name, string description)
         {
-            if (menuIsExsist(name)==true)
+            var menu = Context.GetEntities<Menu>().FirstOrDefault(m => m.Id == id);
+            if (menu != null)
             {
-                return Context.SaveChanges();
-            }
-            else
-            {
-                var menu = Context.Menus.FirstOrDefault(m => m.Id == Helper.IdMenu);
                 menu.Name = name;
                 menu.Description = description;
-                Context.Update(menu);
                 return Context.SaveChanges();
             }
+            else
+            {
+                throw new MenuWasNotFoundException(id);
+            }
         }
-        public bool menuIsExsist(string name)
-        {
-            return Context.Menus.Any(m => m.Name == name);
-        }
-
     }
 }
