@@ -46,9 +46,8 @@ namespace KitchenApp.Controllers
         public IActionResult CreateNewMenu() => View();
         public IActionResult UpdateMenu(Guid Id)
         {
-            var menu = appContext.Menus.FirstOrDefault(m => m.Id == Id);
+            var menu = appContext.GetEntities<Menu>().FirstOrDefault(m => m.Id == Id);
             return View(menu);
-            
         }
         public IActionResult CreateNewUser()
         {
@@ -61,10 +60,8 @@ namespace KitchenApp.Controllers
         }
         public IActionResult UpdateUser(Guid Id)
         {
-            var user = appContext.Users.FirstOrDefault(u => u.Id == Id);
+            var user = appContext.GetEntities<User>().FirstOrDefault(u => u.Id == Id);
             return View(user);
-
-            
         }
         public IActionResult SelectMenuForToday() => View();
 
@@ -91,7 +88,7 @@ namespace KitchenApp.Controllers
             //is not empty
             userData.Salt = Helper.SaltGenerate();
             userData.Password = Helper.HashPassword(userData.Password, userData.Salt);
-            //appContext.AddEntity(userData);
+
             return View(userData);
         }
         public IActionResult DeleteUser() => View();
@@ -102,28 +99,16 @@ namespace KitchenApp.Controllers
 
         public IActionResult DeleteOrder() => View();
         public IActionResult CreateOrder() => View();
-       
+
         [HttpPost]
-        public int CreateNewMenu(string name,string description)
+        public int CreateNewMenu(string name, string description)
         {
-          var menus= appContext.Menus.ToList();
-            foreach (var item in menus)
+            Menu menu = new Menu(appContext)
             {
-                if (item.Name==name)
-                {
-
-                }
-
-            }
-            Menu menu = new Menu() {
-
-
-
-                Name =name,Description=description };
-            appContext.Add(menu);
-       return     appContext.SaveChanges();
-         }
-
-        
+                Name = name,
+                Description = description
+            };
+            return appContext.SaveChanges();
+        }
     }
 }

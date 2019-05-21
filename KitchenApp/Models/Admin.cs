@@ -11,7 +11,7 @@ namespace KitchenApp.Models
     {
         public void GetAdmin()
         {
-           
+
         }
         public Admin(KitchenAppContext context) : base(context)
         {
@@ -64,7 +64,7 @@ namespace KitchenApp.Models
 
         public void CloseOrderOfToday()
         {
-            var menu = GetTodaysMenu();
+            var menu = Context.GetSelectedMenuForToday();
             if (menu != null)
             {
                 var order = menu.Orders.Single(a => a.Date == DateTime.Today);
@@ -77,24 +77,9 @@ namespace KitchenApp.Models
             }
         }
 
-        public List<User> GetListOfMenu()
-        {
-            List<User> menus = Context.Users.ToList();
-            return menus;
-
-
-        }
-
-        public int CreateNewMenu(string name,string description)
+        public int CreateNewMenu(string name, string description)
         {
             return 0;
         }
-
-
-        public bool ifMenuIsExsist(string name)
-        {
-            return Context.Menus.Any(m => m.Name == name);
-        }
-
     }
 }
