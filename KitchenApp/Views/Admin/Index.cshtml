@@ -7,9 +7,9 @@
 <form class="form">
 
     <div class="form-group">
-        <h1 class="text-center">SelectMenuForToday </h1>
+        <h3 class="text-center">SelectMenuForToday </h3>
 
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" >
             @foreach (var item in Model)
             {
                 <option value="@Html.DisplayFor(modelItem => item.Id)">

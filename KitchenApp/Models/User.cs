@@ -1,5 +1,6 @@
 ﻿using KitchenApp.Models;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using KitchenApp.Models.Exceptions;
 
@@ -44,6 +45,7 @@ namespace KitchenApp.Models
         }
 
         public string Login { get; set; }
+        [Required(ErrorMessage = "Password is not assignet")]
         public string Password { get; set; }
         public string Salt { get; set; }
         public string FirstName { get; set; }

@@ -5,34 +5,50 @@
 
 }
 
-                <form method="post" id="login-form" class="form" asp-action="CreateNewUser" asp-controller="Admin">
-                    <div class="validation" asp-validation-summary="ModelOnly" />
-                    <h3 class="text-center text-info">Create New User</h3>
-                    <div class="form-group">
-                        <label class="text-info" asp-for="FirstName">FirstName</label>
-                        <input type="text"  asp-for="FirstName" class="form-control">
-                        <span class="text-danger" asp-validation-for="FirstName"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-info" asp-for="LastName">LastName</label>
-                        <input type="text" asp-for="LastName" class="form-control">
-                        <span asp-validation-for="LastName"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-info" asp-for="Login">Login</label>
-                        <input type="text" asp-for="Login" class="form-control">
-                        <span class="text-danger" asp-validation-for="Login"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-info" asp-for="Password">Password</label>
-                        <input type="password" asp-for="Password" class="form-control">
-                        <span class="text-danger" asp-validation-for="Password"></span>
-                    </div>
+<form method="post" id="login-form" class="form" asp-action="CreateNewUser" asp-controller="Admin">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+    <h3 class="text-center text-info">Create New User</h3>
+    <div class="form-group">
+        <label class="text-info" asp-for="FirstName">FirstName</label>
+        <input type="text" asp-for="FirstName" class="form-control">
+        <span class="text-danger" asp-validation-for="FirstName"></span>
+    </div>
+    <div class="form-group">
+        <label class="text-info" asp-for="LastName">LastName</label>
+        <input type="text" asp-for="LastName" class="form-control">
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div class="form-group">
+        <label class="text-info" asp-for="Login">Login</label>
+        <input type="text" asp-for="Login" class="form-control">
+        <span class="text-danger" asp-validation-for="Login"></span>
+    </div>
+    <div class="form-group">
+        <label class="text-info" asp-for="Password">Password</label>
+        <input type="password" asp-for="Password" class="form-control">
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
 
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-info btn-md" value="Create">
-                    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-info btn-md" value="Create">
+    </div>
 
-                </form>
+</form>
 
+@section scripts{
 
+    <environment names="Development">
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
+                asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"
+                asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive">
+        </script>
+    </environment>
+}

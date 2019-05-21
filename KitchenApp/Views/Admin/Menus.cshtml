@@ -6,45 +6,44 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<KitchenApp.Models.Menu>
 
-<form method="post" class="form">
+
     <div style="margin-top:15px; margin-bottom:10px;" class="btn-group">
-    <a  asp-action="CreateNewMenu" asp-controller="Admin"  class="btn btn-info">
-        <i class="glyphicon glyphicon-plus"></i>  Create New Menu
-    </a>
-</div>
+        <a asp-action="CreateNewMenu" asp-controller="Admin" class="btn btn-info">
+            <i class="glyphicon glyphicon-plus"></i>  Create New Menu
+        </a>
+    </div>
     <table class="table table-bordered table-sm table-striped">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Action</th>
-                
+
             </tr>
         </thead>
         <tbody>
-           
-                
-                @foreach (var menu in Model)
-                {
-                   
-            <tr>
 
-                <td>@menu.Name</td>
-                <td>@menu.Description</td>
 
-                <td>
-                    <a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id">
-                        <i class="glyphicon glyphicon-pencil" title="Edit"></i>
-                    </a>
-                    <a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id">
-                        <i class="glyphicon glyphicon-trash" title="Delete"></i>
-                    </a>
+            @foreach (var menu in Model)
+            {
 
-                </td>
+                <tr>
+
+                    <td>@menu.Name</td>
+                    <td>@menu.Description</td>
+
+                    <td>
+                        <a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@menu.Id"
+                            class="btn btn-info" title="Edit">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+                        <button asp-action="DeleteMenu" asp-route-id="@menu.Id" onclick="DeleteMenu('@menu.Name')" asp-controller="Admin" type="submit" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
 
                 </tr>
-                }
-            
+            }
+
         </tbody>
     </table>
-</form>

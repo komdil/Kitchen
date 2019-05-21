@@ -1,4 +1,4 @@
-﻿
+﻿@using KitchenApp.Models
 @{
     ViewData["Title"] = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,11 +10,10 @@
     <table class="table table-bordered table-sm table-striped">
         <thead>
             <tr>
-                
-                <th>FirstName</th>
-                <th>LastName</th>
+
+
                 <th>Login</th>
-            
+
                 <th>Action</th>
 
             </tr>
@@ -28,33 +27,33 @@
             }
             else
             {
-            
+
                 @foreach (var users in Model)
                 {
-                   
-                <tr>
-                    <td>@users.FirstName</td>
 
-                    <td>@users.LastName</td>
-                    <td>@users.Login</td>
-                    
-                    
+                    <tr>
 
-                    <td>
-                        <a asp-action="UpdateUser" asp-controller="Admin" asp-route-id="@users.Id">
-                            <i class="glyphicon glyphicon-pencil" title="Edit"></i>
-                        </a>
-                        <a asp-action="UpdateMenu" asp-controller="Admin" asp-route-id="@users.Id">
-                            <i class="glyphicon glyphicon-trash" title="Delete"></i>
-                        </a>
-                    </td>
+                        <td>@users.Login</td>
 
 
-                   
-                </tr>
+
+                        <td>
+                            <a asp-action="UpdateUser" asp-route-id="@users.Id" asp-controller="Admin"
+                               class="btn btn-info" title="Edit">
+                                <i class="glyphicon glyphicon-pencil"></i> 
+                            </a>
+                            <a id="deleteuser" data-toggle="modal"  asp-route-id="@users.Id" data-id="@users.Id" data-target="#modal-action-student" class="btn btn-danger" title="Delete">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </td>
+
+
+
+                    </tr>
                 }
             }
         </tbody>
     </table>
+   
 </form>
 

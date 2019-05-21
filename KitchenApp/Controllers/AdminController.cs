@@ -29,7 +29,7 @@ namespace KitchenApp.Controllers
             var menus = appContext.GetEntities<Menu>();
             return View(menus);
         }
-
+        
         public IActionResult Users()
         {
             var users = appContext.GetEntities<User>();
@@ -49,6 +49,18 @@ namespace KitchenApp.Controllers
             var menu = appContext.GetEntities<Menu>().FirstOrDefault(m => m.Id == Id);
             return View(menu);
         }
+        [HttpPost]
+        public IActionResult UpdateMenu(Menu menuModel)
+        {
+            var menu = appContext.Menus.FirstOrDefault(m => m.Id == Helper.IdMenu);
+            menu.Name = menuModel.Name;
+            menu.Description = menuModel.Description;
+            appContext.Update(menu);
+            appContext.SaveChanges();
+            return RedirectToAction("Menus", "Admin");
+
+        }
+
         public IActionResult CreateNewUser()
         {
             return View();
@@ -103,7 +115,8 @@ namespace KitchenApp.Controllers
         [HttpPost]
         public int CreateNewMenu(string name, string description)
         {
-            Menu menu = new Menu(appContext)
+          var menus= appContext.Menus.ToList();
+            foreach (var item in menus)
             {
                 Name = name,
                 Description = description
