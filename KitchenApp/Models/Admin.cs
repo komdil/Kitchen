@@ -80,8 +80,15 @@ namespace KitchenApp.Models
 
         public int CreateNewMenu(string name, string description)
         {
-            Menu menu = new Menu(Context) { Name = name, Description = description };
-            return Context.SaveChanges();
+            if (menuIsAlreadyExsist(name))
+            {
+                return Context.SaveChanges();
+            }
+            else
+            {
+                Menu menu = new Menu(Context) { Name = name, Description = description };
+                return Context.SaveChanges();
+            }
         }
 
         public int UpdateMenu(Guid id, string name, string description)
@@ -97,6 +104,13 @@ namespace KitchenApp.Models
             {
                 throw new MenuWasNotFoundException(id);
             }
+        }
+
+        public bool menuIsAlreadyExsist(string name)
+        {
+            var menu = Context.GetEntities<Menu>().Any(m => m.Name == name);
+
+            return menu;
         }
     }
 }
