@@ -73,6 +73,7 @@ namespace KitchenApp.Controllers
         public IActionResult UpdateMenu(Guid Id)
         {
             var menuModel = appContext.GetEntities<Menu>().FirstOrDefault(m => m.Id == Id);
+           
             return View(menuModel);
 
         }

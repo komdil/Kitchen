@@ -37,6 +37,7 @@ namespace KitchenApp.Models
         void MenuMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<Menu>();
+            builder.Entity<Menu>().HasIndex(m => m.Name).IsUnique();
             etBuilder.HasKey(m => new { m.Id });
             etBuilder.HasMany(m => m.Orders).WithOne(d => d.Menu).HasForeignKey(f => f.MenuId);
         }
