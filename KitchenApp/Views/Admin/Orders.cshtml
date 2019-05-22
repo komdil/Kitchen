@@ -1,40 +1,37 @@
 ﻿
 @{
     ViewData["Title"] = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<KitchenApp.Models.OrderDetail>
 
-<div class="table">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(models => models.User)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(models => models.Order)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderId)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<form action="/" method="post">
 
-</div>
+    <div class="form-group">
+        <label>Select Order</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Select User</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="text" name="name" value="" />
+
+
+    </div>
 
 
 
+</form>

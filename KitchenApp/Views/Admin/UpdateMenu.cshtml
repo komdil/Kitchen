@@ -1,4 +1,4 @@
-﻿@model KitchenApp.Models.Menu
+﻿@model KitchenApp.ViewsModel.MenuModel
 
 
 @{
@@ -8,19 +8,20 @@
 }
 
 
-<form method="post"  class="form" asp-action="UpdateMenu" asp-controller="Admin">
+<form method="post" class="form" asp-action="UpdateMenu" asp-controller="Admin">
     <h3 class="text-center text-info">UpdateMenu</h3>
     <div class="form-group">
         <label class="text-info" asp-for="Name">Name</label>
-        <input type="text" asp-for="Name" class="form-control">
+        <input type="text" asp-for="Name" class="form-control"/>
         <span asp-validation-for="Name"></span>
     </div>
     <div class="form-group">
         <label class="text-info" asp-for="Description">Description</label>
-        <input type="text" asp-for="Description" class="form-control">
+        <input type="text" asp-for="Description" class="form-control" />
+        <input type="hidden" asp-for="Id" class="form-control"/>
         <span asp-validation-for="Description"></span>
     </div>
-
+    <label class="text-danger">@Html.DisplayFor(Model=>Model.ErrorMessage)</label>
     <div class="form-group">
         <input type="submit" class="btn btn-info btn-md" value="Update">
     </div>

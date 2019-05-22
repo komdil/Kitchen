@@ -50,6 +50,7 @@ namespace KitchenApp.Models
         void UserMapping(ModelBuilder builder)
         {
             var etBuilder = builder.Entity<User>();
+            builder.Entity<User>().HasIndex(m => m.Login).IsUnique();
             etBuilder.HasKey(m => new { m.Id });
             etBuilder.HasMany(u => u.Details).WithOne(d => d.User).HasForeignKey(f => f.UserId);
             etBuilder.HasMany(u => u.Payments).WithOne(d => d.User).HasForeignKey(f => f.UserId);
@@ -98,9 +99,9 @@ namespace KitchenApp.Models
             }
         }
 
-        public User GetUser(string login)
+        public User GetUser(Guid id)
         {
-            var user = GetEntities<User>().FirstOrDefault(u => u.Login == login);
+            var user = GetEntities<User>().FirstOrDefault(u => u.Id == id);
             if (user != null)
             {
                 user.Context = this;
@@ -108,7 +109,7 @@ namespace KitchenApp.Models
             }
             else
             {
-                throw new UserWasNotFoundException(login);
+                throw new UserWasNotFoundException(id);
             }
         }
     }

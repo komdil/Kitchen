@@ -8,21 +8,20 @@
 
 
     <div style="margin-top:15px; margin-bottom:10px;" class="btn-group">
-        <a asp-action="CreateNewMenu" asp-controller="Admin" class="btn btn-info">
+        <a   asp-action="CreateNewMenu" asp-controller="Admin" class="btn btn-info">
             <i class="glyphicon glyphicon-plus"></i>  Create New Menu
         </a>
     </div>
-    <table class="table table-bordered table-sm table-striped">
+    <table  class="table table-bordered table-sm table-striped">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Action</th>
-
             </tr>
         </thead>
         <tbody>
-
+            
 
             @foreach (var menu in Model)
             {

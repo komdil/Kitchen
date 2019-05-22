@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using KitchenApp.Models;
@@ -104,7 +105,18 @@ namespace KitchenApp.Models
             {
                 menu.Name = name;
                 menu.Description = description;
-                Context.SaveChanges();
+                try
+                {
+                    Context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException is SqlException)
+                    {
+                        throw new MenuAleadyIsExsistException(name);
+                    }
+                    throw;
+                }
             }
             else
             {
@@ -132,6 +144,35 @@ namespace KitchenApp.Models
 
 
 
+            }
+
+        }
+
+        public void UpdateUser(Guid id,string firstName,string lastName,string login,string password)
+        {
+            var user = Context.GetEntities<User>().FirstOrDefault(m => m.Id == id);
+            if (user != null)
+            {
+                user.FirstName = firstName;
+                user.LastName = lastName;
+                user.Login = login;
+                user.Password = password;
+                try
+                {
+                    Context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException is SqlException)
+                    {
+                        throw new UserIsAlreadyExsist(login);
+                    }
+                    throw;
+                }
+            }
+            else
+            {
+                throw new MenuWasNotFoundException(id);
             }
 
         }

@@ -4,7 +4,7 @@ namespace KitchenApp.Models.Exceptions
 {
     public class UserWasNotFoundException : Exception
     {
-        public UserWasNotFoundException(string login) : base($"User with '{login}' was not found")
+        public UserWasNotFoundException(Guid id) : base($"User with id '{id}' was not found")
         {
 
         }

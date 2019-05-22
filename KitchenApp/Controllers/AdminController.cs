@@ -10,6 +10,7 @@ using SignalRPushNotification.Server;
 using SignalRPushNotification.Server.Models;
 using System.Threading.Tasks;
 using KitchenApp.Models.Exceptions;
+using System.Data.SqlClient;
 
 namespace KitchenApp.Controllers
 {
@@ -36,8 +37,17 @@ namespace KitchenApp.Controllers
 
         public IActionResult Index()
         {
-            var menus = appContext.GetEntities<Menu>();
+            var menus = appContext.GetEntities<Menu>().ToList();
+            
             return View(menus);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string SelectedMenu)
+        {
+            Menu menu = appContext.GetEntities<Menu>().Single(m => m.Id.ToString() == SelectedMenu);
+            Admin.SelectMenuForToday(menu);
+            return View();
         }
 
         public IActionResult Users()
@@ -46,7 +56,16 @@ namespace KitchenApp.Controllers
             return View(users);
         }
 
-        public IActionResult Orders() => View();
+        public IActionResult Orders()
+        {
+            
+
+            var order = appContext.GetEntities<Order>();
+         
+            ViewBag.order = order;
+            return View(order);
+
+        }
         public IActionResult Payments() => View();
         public IActionResult Menus()
         {
@@ -60,6 +79,7 @@ namespace KitchenApp.Controllers
             try
             {
                 Admin.CreateNewMenu(menuModel.Name, menuModel.Description);
+                return RedirectToAction("Menus", "Admin");
             }
             catch (MenuAleadyIsExsistException ex)
             {
@@ -72,10 +92,9 @@ namespace KitchenApp.Controllers
         [HttpGet]
         public IActionResult UpdateMenu(Guid Id)
         {
-            var menuModel = appContext.GetEntities<Menu>().FirstOrDefault(m => m.Id == Id);
-           
+            var menu = appContext.GetEntities<Menu>().FirstOrDefault(m => m.Id == Id);
+            var menuModel = new MenuModel() { Name = menu.Name, Description = menu.Description, Id = menu.Id };
             return View(menuModel);
-
         }
 
         [HttpPost]
@@ -85,10 +104,18 @@ namespace KitchenApp.Controllers
             try
             {
                 Admin.UpdateMenu(menuModel.Id, menuModel.Name, menuModel.Description);
+                return RedirectToAction("Menus", "Admin");
             }
-            catch (MenuWasNotFoundException ex)
+            catch (Exception ex)
             {
-                menuModel.ErrorMessage = ex.Message;
+                if (ex is MenuAleadyIsExsistException || ex is MenuWasNotFoundException)
+                {
+                    menuModel.ErrorMessage = ex.Message;
+                }
+                else
+                {
+                    throw;
+                }
             }
             return View(menuModel);
         }
@@ -103,7 +130,7 @@ namespace KitchenApp.Controllers
         {
             try
             {
-                Admin.CreateNewUser(userModel.FirstName, userModel.LastName, userModel.Login,userModel.Password);
+                Admin.CreateNewUser(userModel.FirstName, userModel.LastName, userModel.Login, userModel.Password);
             }
             catch (UserIsAlreadyExsist ex)
             {
@@ -113,20 +140,52 @@ namespace KitchenApp.Controllers
 
         }
 
-         public IActionResult UpdateUser(Guid Id)
+        public IActionResult UpdateUser(Guid Id)
         {
             var user = appContext.GetEntities<User>().FirstOrDefault(u => u.Id == Id);
-            return View(user);
+            var userModel = new UserModel{FirstName=user.FirstName,LastName=user.LastName,Login=user.Login,Password=user.Password,Id=user.Id};
+
+            return View(userModel);
         }
 
         [HttpPost]
-        public IActionResult UpdateUser(Guid id, UserModel userModel)
+        public IActionResult UpdateUser(UserModel userModel)
         {
-            var user = appContext.GetEntities<User>().FirstOrDefault(u => u.Id == userModel.Id);
-            return View(user);
+            try
+            {
+                Admin.UpdateUser(userModel.Id,userModel.FirstName,userModel.LastName,userModel.Login,userModel.Password);
+                return RedirectToAction("Users", "Admin");
+            }
+            catch (Exception ex)
+            {
+                if (ex is MenuAleadyIsExsistException || ex is MenuWasNotFoundException)
+                {
+                    userModel.Errormessage = ex.Message;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return View(userModel); 
         }
 
-        public IActionResult SelectMenuForToday() => View();
+        public IActionResult SelectMenuForToday()
+        {
+            var menu = appContext.GetEntities<Menu>().ToList();
+            ViewBag.menuname = menu;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SelectMenuForToday(Menu menu)
+        {
+            Admin.SelectMenuForToday(menu);
+            return View();
+
+        }
+            
+
+
 
         public async Task<IActionResult> SelectMenuForToday(PushNotificationModel notification)
         {

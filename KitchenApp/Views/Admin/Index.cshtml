@@ -2,20 +2,18 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @model IEnumerable<KitchenApp.Models.Menu>
-<form class="form">
+<form class="form" asp-action="Index" asp-controller="Admin"  method="post">
 
     <div class="form-group">
         <h3 class="text-center">SelectMenuForToday </h3>
-
-        <select class="form-control" >
+        <select class="form-control" name="SelectedMenu">
             @foreach (var item in Model)
             {
-                <option value="@Html.DisplayFor(modelItem => item.Id)">
-                    @Html.DisplayFor(modelItem => item.Name)
-                </option>
+                <option value="@item.Id">@item.Name</option>
             }
+
         </select>
-    </div>
-</form>
+        <button type="submit"> SelectMenu</button>
+        </div>
+        </form>
