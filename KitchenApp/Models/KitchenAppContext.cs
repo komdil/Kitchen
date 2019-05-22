@@ -97,6 +97,20 @@ namespace KitchenApp.Models
                 throw new MenuWasNotSelectedForTodayException();
             }
         }
+
+        public User GetUser(string login)
+        {
+            var user = GetEntities<User>().FirstOrDefault(u => u.Login == login);
+            if (user != null)
+            {
+                user.Context = this;
+                return user;
+            }
+            else
+            {
+                throw new UserWasNotFoundException(login);
+            }
+        }
     }
 }
 
