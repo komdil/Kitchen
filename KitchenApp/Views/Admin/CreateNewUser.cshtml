@@ -28,7 +28,7 @@
         <input type="password" asp-for="Password" class="form-control">
         <span class="text-danger" asp-validation-for="Password"></span>
     </div>
-
+    <label class="text-danger">@Html.DisplayFor(Model=>Model.Errormessage)</label>
     <div class="form-group">
         <input type="submit" class="btn btn-info btn-md" value="Create">
     </div>

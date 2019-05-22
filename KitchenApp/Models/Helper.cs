@@ -13,7 +13,7 @@ namespace KitchenApp.Models
         public const string USER_ROLE = "User";
         public const string DATABASE = "KitchenAppDb";
         public const string CONNECTION_STRING = @"Server=(localdb)\MSSQLLocalDB;Database=KitchenAppDb;Trusted_Connection=True;";
-
+        public static Guid Idmenu;
         public static string HashPassword(string password, string userSalt)
         {
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(

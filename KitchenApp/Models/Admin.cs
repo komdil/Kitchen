@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KitchenApp.Models;
 using KitchenApp.Models.Exceptions;
+using KitchenApp.ViewsModel;
 
 namespace KitchenApp.Models
 {
@@ -16,7 +17,7 @@ namespace KitchenApp.Models
         }
         public Admin(KitchenAppContext context) : base(context)
         {
-
+            Context = context;
         }
         protected Admin() : base()
         {
@@ -78,27 +79,32 @@ namespace KitchenApp.Models
             }
         }
 
-        public int CreateNewMenu(string name, string description)
+        public void CreateNewMenu(string name, string description)
         {
-            if (menuIsAlreadyExsist(name))
+            var menu = Context.GetEntities<Menu>().Any(m => m.Name == name);
+            if (menu)
             {
-                return Context.SaveChanges();
+                throw new MenuAleadyIsExsistException(name);
             }
             else
             {
-                Menu menu = new Menu(Context) { Name = name, Description = description };
-                return Context.SaveChanges();
+                Menu menuNew = new Menu(Context);
+                menuNew.Name = name;
+                menuNew.Description = description;
+                Context.Add(menuNew);
+                Context.SaveChanges();
             }
+
         }
 
-        public int UpdateMenu(Guid id, string name, string description)
+        public void UpdateMenu(Guid id, string name, string description)
         {
             var menu = Context.GetEntities<Menu>().FirstOrDefault(m => m.Id == id);
             if (menu != null)
             {
                 menu.Name = name;
                 menu.Description = description;
-                return Context.SaveChanges();
+                Context.SaveChanges();
             }
             else
             {
@@ -106,11 +112,36 @@ namespace KitchenApp.Models
             }
         }
 
-        public bool menuIsAlreadyExsist(string name)
+        public void CreateNewUser(string firstName, string lastName, string login, string password)
         {
-            var menu = Context.GetEntities<Menu>().Any(m => m.Name == name);
+            var user = Context.GetEntities<User>().Any(u => u.Login == login);
+            if (user)
+            {
+                throw new UserIsAlreadyExsist(login);
+            }
+            else
+            {
+                User userNew = new User(Context);
+                userNew.FirstName = firstName;
+                userNew.LastName = lastName;
+                userNew.Login = login;
+                userNew.Password = password;
+                Context.Add(userNew);
+                Context.SaveChanges();
 
-            return menu;
+
+
+
+            }
+
         }
+
+
     }
+
+
+
+
+
 }
+

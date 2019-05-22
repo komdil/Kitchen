@@ -12,8 +12,9 @@
             <tr>
 
 
+                <th>FirstName</th>
+                <th>LastName</th>
                 <th>Login</th>
-
                 <th>Action</th>
 
             </tr>
@@ -31,25 +32,28 @@
                 @foreach (var users in Model)
                 {
 
-                    <tr>
+                <tr>
+                    <td>@users.FirstName</td>
 
-                        <td>@users.Login</td>
+                    <td>@users.LastName</td>
 
-
-
-                        <td>
-                            <a asp-action="UpdateUser" asp-route-id="@users.Id" asp-controller="Admin"
-                               class="btn btn-info" title="Edit">
-                                <i class="glyphicon glyphicon-pencil"></i> 
-                            </a>
-                            <a id="deleteuser" data-toggle="modal"  asp-route-id="@users.Id" data-id="@users.Id" data-target="#modal-action-student" class="btn btn-danger" title="Delete">
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </a>
-                        </td>
+                    <td>@users.Login</td>
 
 
 
-                    </tr>
+                    <td>
+                        <a asp-action="UpdateUser" asp-route-id="@users.Id" asp-controller="Admin"
+                           class="btn btn-info" title="Edit">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+                        <a id="deleteuser" data-toggle="modal" asp-route-id="@users.Id" data-id="@users.Id" data-target="#modal-action-student" class="btn btn-danger" title="Delete">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </td>
+
+
+
+                </tr>
                 }
             }
         </tbody>

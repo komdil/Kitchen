@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 namespace KitchenApp.Models.Exceptions
 {
-    public class MenuAleadyIsExsistException:Exception
+    public class UserIsAlreadyExsist:Exception
     {
-        public MenuAleadyIsExsistException(string name) : base($"Menu with name {name} is aleady exsist")
+        public UserIsAlreadyExsist(string login):base($"User with login {login} is already exsist ")
         {
 
         }
+
 
     }
 }

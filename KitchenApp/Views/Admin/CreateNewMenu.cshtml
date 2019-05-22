@@ -17,7 +17,7 @@
         <input type="text" asp-for="Name" class="form-control">
         <span asp-validation-for="Description"></span>
     </div>
-
+    <label class="text-danger">@Html.DisplayFor(Model=>Model.ErrorMessage)</label>
     <div class="form-group">
         <input type="submit" class="btn btn-info btn-md" value="Create">
     </div>

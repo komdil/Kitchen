@@ -1,9 +1,4 @@
-﻿using KitchenApp.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace KitchenApp.Models
 {
@@ -15,9 +10,9 @@ namespace KitchenApp.Models
         }
         protected Menu() : base()
         {
-            
+
         }
-        [Required(ErrorMessage = "Name is not assignet")]
+
         public string Name { get; set; }
         public string Description { get; set; }
         public virtual List<Order> Orders { get; set; } = new List<Order>();
